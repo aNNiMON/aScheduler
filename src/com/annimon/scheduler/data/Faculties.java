@@ -24,4 +24,10 @@ public class Faculties extends Entity {
     public void setAbbreviation(String abbreviation) {
         this.abbreviation = abbreviation;
     }
+
+    @Override
+    public String toString() {
+        return "Faculties{" + "name=" + name + ", abbreviation=" + abbreviation + '}';
+    }
+    
 }

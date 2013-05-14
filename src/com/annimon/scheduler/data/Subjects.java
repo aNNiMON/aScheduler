@@ -24,4 +24,10 @@ public class Subjects extends Entity {
     public void setAbbreviation(String abbreviation) {
         this.abbreviation = abbreviation;
     }
+
+    @Override
+    public String toString() {
+        return "Subjects{" + "name=" + name + ", abbreviation=" + abbreviation + '}';
+    }
+    
 }

@@ -27,11 +27,14 @@ public class Departments extends Entity {
     }
     
     /*public Faculties getFaculty() {
-        return faculty;
+    return faculty;
     }
-
     public void setFaculty(Faculties faculty) {
-        this.faculty = faculty;
+    this.faculty = faculty;
     }*/
+    @Override
+    public String toString() {
+        return "Departments{" + "name=" + name + ", facultyId=" + facultyId + '}';
+    }
 
 }

@@ -119,10 +119,14 @@ public class Pairs extends Entity {
     }
     
     /*public Audiences getAudience() {
-        return audience;
+    return audience;
     }
-
     public void setAudience(Audiences audience) {
-        this.audience = audience;
+    this.audience = audience;
     }*/
+    @Override
+    public String toString() {
+        return "Pairs{" + "number=" + number + ", timeBegin=" + timeBegin + ", timeEnd=" + timeEnd + ", day=" + day + ", week=" + week + ", groupId=" + groupId + ", professorId=" + professorId + ", subjectId=" + subjectId + ", audienceId=" + audienceId + '}';
+    }
+    
 }

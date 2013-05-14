@@ -82,10 +82,14 @@ public class Groups extends Entity {
     }
 
     /*public Departments getDepartment() {
-        return department;
+    return department;
     }
-
     public void setDepartment(Departments department) {
-        this.department = department;
+    this.department = department;
     }*/
+    @Override
+    public String toString() {
+        return "Groups{" + "name=" + name + ", formationYear=" + formationYear + ", strength=" + strength + ", educationFormId=" + educationFormId + ", specialityId=" + specialityId + ", departmentId=" + departmentId + '}';
+    }
+    
 }

@@ -33,4 +33,10 @@ public class Professors extends Entity {
     public void setMiddlename(String middlename) {
         this.middlename = middlename;
     }
+
+    @Override
+    public String toString() {
+        return "Professors{" + lastname + ' ' + firstname + ' ' + middlename + '}';
+    }
+    
 }

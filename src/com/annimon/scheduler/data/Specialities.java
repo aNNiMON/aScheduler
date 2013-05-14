@@ -24,4 +24,10 @@ public class Specialities extends Entity {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "Specialities{" + "code=" + code + ", name=" + name + '}';
+    }
+    
 }

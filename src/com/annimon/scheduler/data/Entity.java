@@ -26,4 +26,9 @@ public abstract class Entity {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Entity{" + "id=" + id + '}';
+    }
+
 }

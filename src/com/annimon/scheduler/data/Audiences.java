@@ -43,4 +43,9 @@ public class Audiences extends Entity {
         this.capacity = capacity;
     }
 
+    @Override
+    public String toString() {
+        return "Audiences{" + "number=" + number + ", type=" + type + ", housing=" + housing + ", capacity=" + capacity + '}';
+    }
+
 }
