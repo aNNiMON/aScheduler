@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author aNNiMON
  */
-public class DepartmentsDAO implements IDAO {
+public class DepartmentDAO implements IDAO {
     
     private final IResultSetHandler handler = new IResultSetHandler() {
 

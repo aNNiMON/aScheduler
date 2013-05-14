@@ -29,7 +29,7 @@ public class DBConnection {
     }
     
     
-    private static final String PROPERTY_RESOURCE = "db.properties";
+    private static final String PROPERTY_RESOURCE = "/db.properties";
     
     private Connection connection;
     private PreparedStatement statement;
