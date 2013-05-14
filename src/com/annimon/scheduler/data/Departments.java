@@ -6,18 +6,10 @@ package com.annimon.scheduler.data;
  */
 public class Departments extends Entity {
     
-    private Integer id;
     private String name;
+    private Integer facultyId;
     private Faculties faculty;
     
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
@@ -26,12 +18,20 @@ public class Departments extends Entity {
         this.name = name;
     }
 
-    public Faculties getFaculty() {
+    public Integer getFacultyId() {
+        return facultyId;
+    }
+
+    public void setFacultyId(Integer facultyId) {
+        this.facultyId = facultyId;
+    }
+    
+    /*public Faculties getFaculty() {
         return faculty;
     }
 
     public void setFaculty(Faculties faculty) {
         this.faculty = faculty;
-    }
+    }*/
 
 }

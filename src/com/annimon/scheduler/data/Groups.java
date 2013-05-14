@@ -8,22 +8,16 @@ import java.util.Date;
  */
 public class Groups extends Entity {
 
-    private Integer id;
     private String name;
     private Date formationYear;
     private short strength;
-    private EducationForms educationForm;
-    private Specialities speciality;
-    private Departments department;
+    private Integer educationFormId;
+    //private EducationForms educationForm;
+    private Integer specialityId;
+    //private Specialities speciality;
+    private Integer departmentId;
+    //private Departments department;
     
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
@@ -48,27 +42,50 @@ public class Groups extends Entity {
         this.strength = strength;
     }
 
-    public EducationForms getEducationForm() {
+    public Integer getEducationFormId() {
+        return educationFormId;
+    }
+    
+    public void setEducationFormId(Integer educationFormId) {
+        this.educationFormId = educationFormId;
+    }
+    /*public EducationForms getEducationForm() {
         return educationForm;
     }
 
     public void setEducationForm(EducationForms educationForm) {
         this.educationForm = educationForm;
+    }*/
+
+    public Integer getSpecialityId() {
+        return specialityId;
     }
 
-    public Specialities getSpeciality() {
+    public void setSpecialityId(Integer specialityId) {
+        this.specialityId = specialityId;
+    }
+    
+    /*public Specialities getSpeciality() {
         return speciality;
     }
 
     public void setSpeciality(Specialities speciality) {
         this.speciality = speciality;
+    }*/
+    
+    public Integer getDepartmentId() {
+        return departmentId;
     }
 
-    public Departments getDepartment() {
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    /*public Departments getDepartment() {
         return department;
     }
 
     public void setDepartment(Departments department) {
         this.department = department;
-    }
+    }*/
 }

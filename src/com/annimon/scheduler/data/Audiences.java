@@ -6,20 +6,11 @@ package com.annimon.scheduler.data;
  */
 public class Audiences extends Entity {
     
-    private Integer id;
     private short number;
     private short type;
     private Short housing;
     private Short capacity;
-    
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
+   
     public short getNumber() {
         return number;
     }
@@ -51,4 +42,5 @@ public class Audiences extends Entity {
     public void setCapacity(Short capacity) {
         this.capacity = capacity;
     }
+
 }

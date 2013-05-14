@@ -4,20 +4,11 @@ package com.annimon.scheduler.data;
  * Предметы.
  * @author aNNiMON
  */
-public class Subjects {
+public class Subjects extends Entity {
 
-    private Integer id;
     private String name;
     private String abbreviation;
     
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }

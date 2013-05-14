@@ -6,19 +6,10 @@ package com.annimon.scheduler.data;
  */
 public class Professors extends Entity {
 
-    private Integer id;
     private String lastname;
     private String firstname;
     private String middlename;
     
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getLastname() {
         return lastname;
     }

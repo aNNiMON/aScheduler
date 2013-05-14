@@ -1,5 +1,6 @@
 package com.annimon.scheduler.util;
 
+import com.annimon.scheduler.data.Entity;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -7,6 +8,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -65,13 +68,43 @@ public class DBConnection {
     public ResultSet executeQuery(PreparedStatement pstmt) {
         ResultSet rs = null;
         try {
-            pstmt.executeQuery();
+            rs = pstmt.executeQuery();
         } catch (SQLException ex) {
             ExceptionHandler.handle(ex, "sql query");
         } finally {
             close(pstmt);
         }
         return rs;
+    }
+    
+    public List<Entity> executeQuery(String sql, Object[] params, IResultSetHandler handler) {
+        statement = getStatement(connection, sql, params);
+        List<Entity> resultList = executeQuery(statement, handler);
+        return resultList;
+    }
+    
+    public List<Entity> executeQuery(PreparedStatement pstmt, IResultSetHandler handler) {
+        List<Entity> resultList = new ArrayList<>();
+        
+        ResultSet rs = null;
+        try {
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Entity entity = null;
+                try {
+                    entity = handler.process(rs);
+                } catch (Exception ex) {
+                    ExceptionHandler.handle(ex, "sql handle resultset");
+                }
+                resultList.add(entity);
+            }
+        } catch (SQLException ex) {
+            ExceptionHandler.handle(ex, "sql query");
+        } finally {
+            close(rs);
+            close(pstmt);
+        }
+        return resultList;
     }
 
     public PreparedStatement getStatement(Connection connection, String sql, Object[] params) {

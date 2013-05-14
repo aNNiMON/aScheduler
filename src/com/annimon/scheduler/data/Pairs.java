@@ -8,25 +8,20 @@ import java.util.Date;
  */
 public class Pairs extends Entity {
 
-    private Integer id;
     private short number;
     private Date timeBegin;
     private Date timeEnd;
     private short day;
     private Short week;
-    private Groups group;
-    private Professors professor;
-    private Subjects subject;
-    private Audiences audience;
+    private Integer groupId;
+    //private Groups group;
+    private Integer professorId;
+    //private Professors professor;
+    private Integer subjectId;
+    //private Subjects subject;
+    private Integer audienceId;
+    //private Audiences audience;
     
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public short getNumber() {
         return number;
     }
@@ -67,35 +62,67 @@ public class Pairs extends Entity {
         this.week = week;
     }
 
-    public Groups getGroup() {
+    public Integer getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
+    }
+    
+    /*public Groups getGroup() {
         return group;
     }
 
     public void setGroup(Groups group) {
         this.group = group;
+    }*/
+
+    public Integer getProfessorId() {
+        return professorId;
     }
 
-    public Professors getProfessor() {
+    public void setProfessorId(Integer professorId) {
+        this.professorId = professorId;
+    }
+    
+    /*public Professors getProfessor() {
         return professor;
     }
 
     public void setProfessor(Professors professor) {
         this.professor = professor;
+    }*/
+    
+    public Integer getSubjectId() {
+        return subjectId;
     }
 
-    public Subjects getSubject() {
+    public void setSubjectId(Integer subjectId) {
+        this.subjectId = subjectId;
+    }
+    
+    /*public Subjects getSubject() {
         return subject;
     }
 
     public void setSubject(Subjects subject) {
         this.subject = subject;
+    }*/
+
+    public Integer getAudienceId() {
+        return audienceId;
     }
 
-    public Audiences getAudience() {
+    public void setAudienceId(Integer audienceId) {
+        this.audienceId = audienceId;
+    }
+    
+    /*public Audiences getAudience() {
         return audience;
     }
 
     public void setAudience(Audiences audience) {
         this.audience = audience;
-    }
+    }*/
 }

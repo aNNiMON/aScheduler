@@ -6,15 +6,14 @@ package com.annimon.scheduler.data;
  */
 public class EducationForms extends Entity {
 
-    private Short id;
     private String type;
-    
-    public Short getId() {
-        return id;
+
+    public Short get_Id() {
+        return super.getId().shortValue();
     }
 
-    public void setId(Short id) {
-        this.id = id;
+    public void set_Id(Short id) {
+        super.setId(id.intValue());
     }
 
     public String getType() {

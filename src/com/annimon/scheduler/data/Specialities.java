@@ -6,18 +6,9 @@ package com.annimon.scheduler.data;
  */
 public class Specialities extends Entity {
 
-    private Integer id;
     private String code;
     private String name;
     
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getCode() {
         return code;
     }
