@@ -1,7 +1,9 @@
 package com.annimon.scheduler.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -39,6 +41,8 @@ public class SchedulerPairPanel extends JPanel {
         subjectsPanel.setLayout(new BoxLayout(subjectsPanel, BoxLayout.PAGE_AXIS));
 
         add(subjectsPanel, BorderLayout.CENTER);
+        
+        setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.DARK_GRAY));
     }
     
     public void addSubject(Short week, String subject, String audience, String professor) {

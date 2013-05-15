@@ -1,6 +1,8 @@
 package com.annimon.scheduler.gui;
 
+import java.awt.Color;
 import java.awt.GridLayout;
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 /**
@@ -14,6 +16,7 @@ public class SchedulerGroupPanel extends JPanel {
         for (int i = 0; i < panels.length; i++) {
             add(panels[i]);
         }
+        setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
     }
     
     public void addSchedulerDayPanel(SchedulerDayPanel panel) {
