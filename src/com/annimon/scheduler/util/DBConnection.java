@@ -99,7 +99,7 @@ public class DBConnection {
                 resultList.add(entity);
             }
         } catch (SQLException ex) {
-            ExceptionHandler.handle(ex, "sql query");
+            ExceptionHandler.handle(ex, "sql query " + pstmt.toString());
         } finally {
             close(rs);
             close(pstmt);

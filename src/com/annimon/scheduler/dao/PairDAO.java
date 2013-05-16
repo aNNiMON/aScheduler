@@ -23,7 +23,7 @@ public class PairDAO implements IDAO {
             pr.setTimeBegin(rs.getTime(3));
             pr.setTimeEnd(rs.getTime(4));
             pr.setDay(rs.getShort(5));
-            pr.setWeek(rs.getShort(6));
+            pr.setWeek(rs.getShort(6), rs.wasNull());
             pr.setAudienceId(rs.getInt(7));
             pr.setSubjectId(rs.getInt(8));
             pr.setProfessorId(rs.getInt(9));

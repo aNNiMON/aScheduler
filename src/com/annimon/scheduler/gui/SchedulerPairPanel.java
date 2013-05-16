@@ -46,7 +46,18 @@ public class SchedulerPairPanel extends JPanel {
     }
     
     public void addSubject(Short week, String subject, String audience, String professor) {
-        subjectsPanel.add(new SchedulerSubjectPanel(subject, audience, professor), week.intValue());
+        SchedulerSubjectPanel panel = new SchedulerSubjectPanel(subject, audience, professor);
+        if (week == null) subjectsPanel.add(panel);
+        else {
+            SchedulerSubjectPanel empty = new SchedulerSubjectPanel("--", "--", "--");
+            if (week.intValue() == 0) {
+                subjectsPanel.add(panel);
+                subjectsPanel.add(empty);
+            } else if (week.intValue() == 1) {
+                subjectsPanel.add(empty);
+                subjectsPanel.add(panel);
+            }
+        }
     }
     
 }

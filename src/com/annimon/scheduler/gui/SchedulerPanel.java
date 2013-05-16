@@ -1,10 +1,16 @@
 package com.annimon.scheduler.gui;
 
+import com.annimon.scheduler.data.Departments;
+import com.annimon.scheduler.data.Entity;
 import com.annimon.scheduler.data.Faculties;
+import com.annimon.scheduler.util.DBConnection;
+import com.annimon.scheduler.util.IResultSetHandler;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -18,6 +24,8 @@ import javax.swing.JViewport;
  * @author aNNiMON
  */
 public class SchedulerPanel extends JPanel {
+    
+    private static final Dimension VIEWPORT_DIMENSION = new Dimension(800, 500);
     
     private JComboBox facultyComboBox;
 
@@ -42,65 +50,48 @@ public class SchedulerPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 int index = facultyComboBox.getSelectedIndex();
-                createScheduleTable(faculties[index]);
+                remove(getComponent(getComponentCount() - 1));
+                createScheduleTableDepartment(faculties[index]);
+                validate();
             }
         });
         facultyChoosePanel.add(facultyComboBox);
 
         add(facultyChoosePanel, BorderLayout.NORTH);
-        //add(schedulerFacultyPanel, BorderLayout.SOUTH);
-        
-        createScheduleTable(faculties[0]);
-    }
 
-    public final void createScheduleTable(Faculties faculties) {
-        SchedulerGroupPanel po2 = new SchedulerGroupPanel(createSchedulerDayPanels());
-        SchedulerGroupPanel siia1 = new SchedulerGroupPanel(createSchedulerDayPanels());
+        createScheduleTableDepartment(faculties[0]);
+    }
+    
+    /*
+     * Получить список кафедр указанного факультета и заполнить панель расписания.
+     */
+    private void createScheduleTableDepartment(Faculties faculties) {
+        String sql = "SELECT * FROM departments WHERE faculty = ?";
+        List<Entity> departmensList = DBConnection.getInstance().executeQuery(sql, new Object[] {
+            faculties.getId()
+        }, new IResultSetHandler() {
+            @Override
+            public Entity process(ResultSet rs) throws Exception {
+                Departments dp = new Departments();
+                dp.setId(rs.getInt(1));
+                dp.setName(rs.getString(2));
+                dp.setFacultyId(rs.getInt(3));
+                return dp;
+            }
+        });
         
-        String[] groupNames = new String[] { "2ПО-07", "СИИ А1" };
-        SchedulerGroupPanel[] groupPanels = new SchedulerGroupPanel[] { po2, siia1 };
+        SchedulerFacultyPanel facultyPanel = new SchedulerFacultyPanel();
+        for (Entity entity : departmensList) {
+            Departments department = (Departments) entity;
+            facultyPanel.addSchedulerDepartmentPanel(department);
+        }
         
-        SchedulerDepartmentPanel departmentPanel = new SchedulerDepartmentPanel(groupNames, groupPanels);
-        
-        String[] departmentNames = new String[] { "Компьютерных технологий" };
-        SchedulerDepartmentPanel[] departmentPanels = new SchedulerDepartmentPanel[1];
-        departmentPanels[0] = departmentPanel;
-        
-        SchedulerFacultyPanel facultyPanel = new SchedulerFacultyPanel(departmentNames, departmentPanels);
         JScrollPane scroll = new JScrollPane();
         JViewport viewport = new JViewport();
         viewport.add(facultyPanel);
-        viewport.setViewSize(new Dimension(800, 500));
+        viewport.setViewSize(VIEWPORT_DIMENSION);
         scroll.setViewport(viewport);
-        scroll.setPreferredSize(new Dimension(800, 500));
-        add(scroll, BorderLayout.SOUTH);
-    }
-    
-    private SchedulerPairPanel[] createSchedulerPairPanels() {
-        SchedulerPairPanel[] pair1Panels = new SchedulerPairPanel[4];
-        pair1Panels[0] = new SchedulerPairPanel("1", "");
-        pair1Panels[0].addSubject((short)0, "ООП", "119", "Симасина О.А.");
-        pair1Panels[1] = new SchedulerPairPanel("2", "");
-        pair1Panels[1].addSubject((short)0, "ТПСПП", "120", "Надеева Е.А.");
-        pair1Panels[1].addSubject((short)1, "--", "--", "--");
-        pair1Panels[2] = new SchedulerPairPanel("3", "");
-        pair1Panels[2].addSubject((short)0, "--", "--", "--");
-        pair1Panels[2].addSubject((short)1, "Комп. сети", "115", "Лебедев А.С.");
-        pair1Panels[3] = new SchedulerPairPanel("13:00", "13:30");
-        pair1Panels[3].addSubject((short)0, "Классный час", "405", "Маншилина М.В.");
-        
-        return pair1Panels;
-    }
-    
-    private SchedulerDayPanel[] createSchedulerDayPanels() {
-        SchedulerDayPanel[] dayPanels = new SchedulerDayPanel[6];
-        dayPanels[0] = new SchedulerDayPanel(createSchedulerPairPanels());
-        dayPanels[1] = new SchedulerDayPanel(createSchedulerPairPanels());
-        dayPanels[2] = new SchedulerDayPanel(createSchedulerPairPanels());
-        dayPanels[3] = new SchedulerDayPanel(createSchedulerPairPanels());
-        dayPanels[4] = new SchedulerDayPanel(createSchedulerPairPanels());
-        dayPanels[5] = new SchedulerDayPanel(createSchedulerPairPanels());
-        
-        return dayPanels;
+        scroll.setPreferredSize(VIEWPORT_DIMENSION);
+        add(scroll, BorderLayout.CENTER);
     }
 }

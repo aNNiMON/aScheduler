@@ -33,6 +33,14 @@ public class Professors extends Entity {
     public void setMiddlename(String middlename) {
         this.middlename = middlename;
     }
+    
+    public String getName() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(lastname).append(' ');
+        sb.append(firstname.charAt(0)).append('.');
+        sb.append(middlename.charAt(0)).append('.');
+        return sb.toString();
+    }
 
     @Override
     public String toString() {

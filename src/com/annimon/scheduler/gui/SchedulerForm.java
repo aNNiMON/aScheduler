@@ -1,11 +1,16 @@
 package com.annimon.scheduler.gui;
 
+import com.annimon.scheduler.dao.FacultyDAO;
+import com.annimon.scheduler.data.Entity;
 import com.annimon.scheduler.data.Faculties;
 import com.annimon.scheduler.util.ExceptionHandler;
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.WindowConstants;
 
 /**
  * Главная форма приложения.
@@ -13,25 +18,26 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class SchedulerForm extends JFrame {
     
-    private SchedulerMenuPanel schedulerMenuPanel1;
-    private SchedulerPanel schedulerPanel;
-
     public SchedulerForm() {
-        Faculties fc1 = new Faculties();
-        fc1.setName("Физический");
-        Faculties fc2 = new Faculties();
-        fc2.setName("Филологический");
-        Faculties[] faculties = new Faculties[] { fc1, fc2 };
-        schedulerPanel = new SchedulerPanel(faculties);
-        schedulerMenuPanel1 = new SchedulerMenuPanel();
+        SchedulerPanel schedulerPanel = new SchedulerPanel(getFacultiesArray());
+        SchedulerMenuPanel schedulerMenuPanel = new SchedulerMenuPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().add(schedulerPanel, java.awt.BorderLayout.CENTER);
-        getContentPane().add(schedulerMenuPanel1, java.awt.BorderLayout.EAST);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().add(schedulerPanel, BorderLayout.CENTER);
+        getContentPane().add(schedulerMenuPanel, BorderLayout.EAST);
 
         pack();
-        
-        //schedulerPanel.createScheduleTable(fc1);
+    }
+    
+    private Faculties[] getFacultiesArray() {
+        FacultyDAO faculty = new FacultyDAO();
+        List<Entity> facultiesList = faculty.select();
+        Faculties[] array = new Faculties[facultiesList.size()];
+        for (int i = 0; i < facultiesList.size(); i++) {
+            Entity entity = facultiesList.get(i);
+            array[i] = (Faculties) entity;
+        }
+        return array;
     }
 
     public static void main(String args[]) {

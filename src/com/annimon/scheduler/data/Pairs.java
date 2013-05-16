@@ -61,6 +61,11 @@ public class Pairs extends Entity {
     public void setWeek(Short week) {
         this.week = week;
     }
+    
+    public void setWeek(short week, boolean wasNull) {
+        if (wasNull) this.week = null;
+        else this.week = week;
+    }
 
     public Integer getGroupId() {
         return groupId;
@@ -128,5 +133,5 @@ public class Pairs extends Entity {
     public String toString() {
         return "Pairs{" + "number=" + number + ", timeBegin=" + timeBegin + ", timeEnd=" + timeEnd + ", day=" + day + ", week=" + week + ", groupId=" + groupId + ", professorId=" + professorId + ", subjectId=" + subjectId + ", audienceId=" + audienceId + '}';
     }
-    
+
 }
