@@ -64,6 +64,11 @@ public class SubjectDAO implements IDAO {
         });
         return rowNum;
     }
+    
+    @Override
+    public IResultSetHandler getResultSetHandler() {
+        return handler;
+    }
 
     private Subjects cast(Entity entity) {
         if (entity instanceof Subjects) {

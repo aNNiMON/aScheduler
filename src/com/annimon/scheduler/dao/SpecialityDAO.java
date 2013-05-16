@@ -65,6 +65,11 @@ public class SpecialityDAO implements IDAO {
         return rowNum;
     }
 
+    @Override
+    public IResultSetHandler getResultSetHandler() {
+        return handler;
+    }
+    
     private Specialities cast(Entity entity) {
         if (entity instanceof Specialities) {
             return (Specialities) entity;

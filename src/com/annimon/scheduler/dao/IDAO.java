@@ -1,6 +1,7 @@
 package com.annimon.scheduler.dao;
 
 import com.annimon.scheduler.data.Entity;
+import com.annimon.scheduler.util.IResultSetHandler;
 import java.util.List;
 
 /**
@@ -16,4 +17,6 @@ public interface IDAO {
     public int delete(Entity entity);
     
     public int update(Entity entity);
+    
+    public IResultSetHandler getResultSetHandler();
 }

@@ -77,6 +77,11 @@ public class PairDAO implements IDAO {
         });
         return rowNum;
     }
+    
+    @Override
+    public IResultSetHandler getResultSetHandler() {
+        return handler;
+    }
 
     private Pairs cast(Entity entity) {
         if (entity instanceof Pairs) {

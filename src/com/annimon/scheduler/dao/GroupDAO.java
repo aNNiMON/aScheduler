@@ -73,6 +73,11 @@ public class GroupDAO implements IDAO {
         });
         return rowNum;
     }
+    
+    @Override
+    public IResultSetHandler getResultSetHandler() {
+        return handler;
+    }
 
     private Groups cast(Entity entity) {
         if (entity instanceof Groups) {

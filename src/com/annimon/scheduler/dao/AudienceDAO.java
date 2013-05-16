@@ -66,6 +66,11 @@ public class AudienceDAO implements IDAO {
         });
         return rowNum;
     }
+    
+    @Override
+    public IResultSetHandler getResultSetHandler() {
+        return handler;
+    }
 
     private Audiences cast(Entity entity) {
         if (entity instanceof Audiences) {

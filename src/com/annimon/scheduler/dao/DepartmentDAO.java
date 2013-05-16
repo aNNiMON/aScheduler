@@ -22,8 +22,6 @@ public class DepartmentDAO implements IDAO {
             dp.setId(rs.getInt(1));
             dp.setName(rs.getString(2));
             dp.setFacultyId(rs.getInt(3));
-            //int facultyId = rs.getInt(3); 
-            //dp.setFaculty(getFacultyFromId(facultyId));
             return dp;
         }
     };
@@ -54,7 +52,7 @@ public class DepartmentDAO implements IDAO {
         String sql = "UPDATE departments SET name = ?, faculty = ? " +
                 " WHERE id = ?";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
-            dp.getName(), dp.getFacultyId()/*dp.getFaculty().getId()*/, dp.getId()
+            dp.getName(), dp.getFacultyId(), dp.getId()
         });
         return rowNum;
     }
@@ -67,15 +65,16 @@ public class DepartmentDAO implements IDAO {
         });
         return rowNum;
     }
+    
+    @Override
+    public IResultSetHandler getResultSetHandler() {
+        return handler;
+    }
 
     private Departments cast(Entity entity) {
         if (entity instanceof Departments) {
             return (Departments) entity;
         }
         throw new ClassCastException();
-    }
-    
-    private Faculties getFacultyFromId(Integer id) {
-        return null;
     }
 }

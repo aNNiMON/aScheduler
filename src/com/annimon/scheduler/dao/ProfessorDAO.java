@@ -65,6 +65,11 @@ public class ProfessorDAO implements IDAO {
         });
         return rowNum;
     }
+    
+    @Override
+    public IResultSetHandler getResultSetHandler() {
+        return handler;
+    }
 
     private Professors cast(Entity entity) {
         if (entity instanceof Professors) {

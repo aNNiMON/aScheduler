@@ -64,6 +64,11 @@ public class EducationFormDAO implements IDAO {
         });
         return rowNum;
     }
+    
+    @Override
+    public IResultSetHandler getResultSetHandler() {
+        return handler;
+    }
 
     private EducationForms cast(Entity entity) {
         if (entity instanceof EducationForms) {

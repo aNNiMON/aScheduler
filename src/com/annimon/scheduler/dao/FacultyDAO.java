@@ -64,11 +64,16 @@ public class FacultyDAO implements IDAO {
         });
         return rowNum;
     }
+    
+    @Override
+    public IResultSetHandler getResultSetHandler() {
+        return handler;
+    }
 
     private Faculties cast(Entity entity) {
         if (entity instanceof Faculties) {
             return (Faculties) entity;
         }
         throw new ClassCastException();
-    } 
+    }
 }
