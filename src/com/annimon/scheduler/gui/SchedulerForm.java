@@ -3,9 +3,12 @@ package com.annimon.scheduler.gui;
 import com.annimon.scheduler.dao.FacultyDAO;
 import com.annimon.scheduler.data.Entity;
 import com.annimon.scheduler.data.Faculties;
+import com.annimon.scheduler.util.DBConnection;
 import com.annimon.scheduler.util.ExceptionHandler;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -23,6 +26,12 @@ public class SchedulerForm extends JFrame {
         SchedulerMenuPanel schedulerMenuPanel = new SchedulerMenuPanel();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent evt) {
+                DBConnection.getInstance().destroy();
+            }
+        });
         getContentPane().add(schedulerPanel, BorderLayout.CENTER);
         getContentPane().add(schedulerMenuPanel, BorderLayout.EAST);
 
@@ -40,7 +49,7 @@ public class SchedulerForm extends JFrame {
         return array;
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {

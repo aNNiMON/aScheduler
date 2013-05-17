@@ -48,33 +48,29 @@ public class DBConnection {
     }
     
     public int executeUpdate(PreparedStatement pstmt) {
-        int resultNum = 0;
+        int generatedKey = -1;
         try {
-            resultNum = pstmt.executeUpdate();
+            int resultNum = pstmt.executeUpdate();
+            if (resultNum > 0) {
+                PreparedStatement stm = getStatement(connection, "SELECT last_insert_id()", null);
+                ResultSet rs = null;
+                try {
+                    rs = stm.executeQuery();
+                    rs.next();
+                    generatedKey = rs.getInt(1);
+                } catch (SQLException ex) {
+                    ExceptionHandler.handle(ex, "sql query");
+                } finally {
+                    close(stm);
+                    close(rs);
+                }
+            }
         } catch (SQLException ex) {
             ExceptionHandler.handle(ex, "sql update");
         } finally {
-            close(statement);
-        }
-        return resultNum;
-    }
-    
-    public ResultSet executeQuery(String sql, Object[] params) {
-        statement = getStatement(connection, sql, params);
-        ResultSet rs = executeQuery(statement);
-        return rs;
-    }
-    
-    public ResultSet executeQuery(PreparedStatement pstmt) {
-        ResultSet rs = null;
-        try {
-            rs = pstmt.executeQuery();
-        } catch (SQLException ex) {
-            ExceptionHandler.handle(ex, "sql query");
-        } finally {
             close(pstmt);
         }
-        return rs;
+        return generatedKey;
     }
     
     public List<Entity> executeQuery(String sql, Object[] params, IResultSetHandler handler) {
@@ -146,7 +142,8 @@ public class DBConnection {
         }
     }
 
-    public void close(Connection connection) {
+    public void destroy() {
+        close(statement);
         if (connection != null) {
             try {
                 connection.close();
