@@ -43,6 +43,12 @@ public class SchedulerMenuPanel extends JPanel {
         professorsButton.setText("Преподаватели");
         professorsButton.setMaximumSize(MAX_BUTTON_DIMENSION);
         professorsButton.setMinimumSize(MIN_BUTTON_DIMENSION);
+        professorsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                new ProfessorsForm().setVisible(true);
+            }
+        });
         tableButtonsPanel.add(professorsButton);
         
         add(tableButtonsPanel, BorderLayout.CENTER);
