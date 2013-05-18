@@ -17,66 +17,63 @@ public class SchedulerMenuPanel extends JPanel {
     private static final Dimension MAX_BUTTON_DIMENSION = new Dimension(150, 23);
     private static final Dimension MIN_BUTTON_DIMENSION = new Dimension(70, 23);
     
+    private enum ButtonId {
+        AUDIENCES, PROFESSORS,
+        HELP, ABOUT, EXIT
+    };
+    
     public SchedulerMenuPanel() {
-        JPanel tableButtonsPanel = new JPanel();
-        JPanel controlButtonsPanel = new JPanel();
-        JButton audienceButton = new JButton();
-        JButton professorsButton = new JButton();
-        JButton helpButton = new JButton();
-        JButton aboutButton = new JButton();
-        JButton exitButton = new JButton();
-
         setLayout(new BorderLayout());
 
+        // Кнопки работы с таблицами.
+        JPanel tableButtonsPanel = new JPanel();
         tableButtonsPanel.setLayout(new BoxLayout(tableButtonsPanel, BoxLayout.PAGE_AXIS));
-        audienceButton.setText("Аудитории");
-        audienceButton.setMaximumSize(MAX_BUTTON_DIMENSION);
-        audienceButton.setMinimumSize(MIN_BUTTON_DIMENSION);
-        audienceButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                new AudienceForm().setVisible(true);
-            }
-        });
-        tableButtonsPanel.add(audienceButton);
-        
-        professorsButton.setText("Преподаватели");
-        professorsButton.setMaximumSize(MAX_BUTTON_DIMENSION);
-        professorsButton.setMinimumSize(MIN_BUTTON_DIMENSION);
-        professorsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                new ProfessorsForm().setVisible(true);
-            }
-        });
-        tableButtonsPanel.add(professorsButton);
-        
+        tableButtonsPanel.add(createButton("Аудитории", ButtonId.AUDIENCES));
+        tableButtonsPanel.add(createButton("Преподаватели", ButtonId.PROFESSORS));
         add(tableButtonsPanel, BorderLayout.CENTER);
 
+        // Кнопки управления.
+        JPanel controlButtonsPanel = new JPanel();
         controlButtonsPanel.setLayout(new BoxLayout(controlButtonsPanel, BoxLayout.PAGE_AXIS));
-
-        helpButton.setText("Помощь");
-        helpButton.setMaximumSize(MAX_BUTTON_DIMENSION);
-        helpButton.setMinimumSize(MIN_BUTTON_DIMENSION);
-        controlButtonsPanel.add(helpButton);
-
-        aboutButton.setText("О программе");
-        aboutButton.setMaximumSize(MAX_BUTTON_DIMENSION);
-        aboutButton.setMinimumSize(MIN_BUTTON_DIMENSION);
-        controlButtonsPanel.add(aboutButton);
-
-        exitButton.setText("Выход");
-        exitButton.setMaximumSize(MAX_BUTTON_DIMENSION);
-        exitButton.setMinimumSize(MIN_BUTTON_DIMENSION);
-        exitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                System.exit(0);
-            }
-        });
-        controlButtonsPanel.add(exitButton);
+        controlButtonsPanel.add(createButton("Помощь", ButtonId.HELP));
+        controlButtonsPanel.add(createButton("О программе", ButtonId.ABOUT));
+        controlButtonsPanel.add(createButton("Выход", ButtonId.EXIT));
 
         add(controlButtonsPanel, BorderLayout.SOUTH);
+    }
+    
+    private JButton createButton(String text, final ButtonId id) {
+        JButton button = new JButton();
+        button.setText(text);
+        button.setMaximumSize(MAX_BUTTON_DIMENSION);
+        button.setMinimumSize(MIN_BUTTON_DIMENSION);
+        button.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onButtonClick(id);
+            }
+        });
+        return button;
+    }
+    
+    private void onButtonClick(ButtonId id) {
+        switch (id) {
+            case AUDIENCES:
+                new AudienceForm().setVisible(true);
+                break;
+            case PROFESSORS:
+                new ProfessorsForm().setVisible(true);
+                break;
+                
+            case HELP:
+                break;
+            case ABOUT:
+                break;
+            case EXIT:
+                System.exit(0);
+                break;
+        }
     }
     
 }
