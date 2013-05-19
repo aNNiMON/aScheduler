@@ -17,6 +17,8 @@ import javax.swing.SwingConstants;
 public class SchedulerPairPanel extends JPanel {
 
     private final JPanel subjectsPanel;
+    
+    private SchedulerSubjectPanel upperWeek, bottomWeek;
 
     public SchedulerPairPanel(String numberPair, String timeEnd) {
         JPanel numberPairPanel = new JPanel();
@@ -51,12 +53,13 @@ public class SchedulerPairPanel extends JPanel {
         else {
             SchedulerSubjectPanel empty = new SchedulerSubjectPanel("--", "--", "--");
             if (week.intValue() == 0) {
-                subjectsPanel.add(panel);
-                subjectsPanel.add(empty);
+                upperWeek = panel;
             } else if (week.intValue() == 1) {
-                subjectsPanel.add(empty);
-                subjectsPanel.add(panel);
+                bottomWeek = panel;
             }
+            subjectsPanel.removeAll();
+            subjectsPanel.add(upperWeek == null ? empty : upperWeek );
+            subjectsPanel.add(bottomWeek == null ? empty : bottomWeek);
         }
     }
     

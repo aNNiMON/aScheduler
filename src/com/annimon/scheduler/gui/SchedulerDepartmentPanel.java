@@ -48,7 +48,7 @@ public class SchedulerDepartmentPanel extends JPanel {
      * Получить список пар в выбранный день.
      */
     private Pairs[] getPairsAtDay(Groups group, int day) {
-        String sql = "SELECT * FROM pairs WHERE `group` = ? AND `day` = ?";
+        String sql = "SELECT * FROM pairs WHERE `group` = ? AND `day` = ? ORDER BY `number`";
         List<Entity> pairsList = DBConnection.getInstance().executeQuery(sql, new Object[] {
             group.getId(), day
         }, DAOKeeper.getPairDAO().getResultSetHandler());

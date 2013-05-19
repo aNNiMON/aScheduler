@@ -3,13 +3,14 @@ package com.annimon.scheduler.gui;
 import com.annimon.scheduler.dao.DAOKeeper;
 import com.annimon.scheduler.data.Audiences;
 import com.annimon.scheduler.data.Entity;
+import com.annimon.scheduler.exceptions.InvalidAudienceCapacityException;
+import com.annimon.scheduler.exceptions.ValueOutOfRangeException;
 import com.annimon.scheduler.model.AudienceModel;
 import com.annimon.scheduler.util.GUIUtils;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
-import javax.swing.JTable;
 
 /**
  * Форма редактирования аудиторий.
@@ -49,7 +50,7 @@ public class AudiencesForm extends AbstractEntityForm {
     }
 
     @Override
-    protected void fillDataInEditorPanel(int rowSelected, JTable table) {
+    protected void fillComponentsInEditorPanel(int rowSelected) {
         numberSpinner.setValue(getValueAt(rowSelected, 1));
         String type = (String) getValueAt(rowSelected, 2);
         typeComboBox.setSelectedIndex(type.equals(AudienceModel.AUDIENCE_TYPE[0]) ? 0 : 1);
@@ -62,7 +63,15 @@ public class AudiencesForm extends AbstractEntityForm {
         short number = (short) numberSpinner.getValue();
         short type = (short) typeComboBox.getSelectedIndex();
         short housing = (short) housingSpinner.getValue();
+        if (housing > 100) {
+            GUIUtils.showErrorMessage(new ValueOutOfRangeException(housing, "> 100"));
+            return null;
+        }
         short capacity = (short) capacitySpinner.getValue();
+        if ( (1 > capacity) || (capacity > 500) ) {
+            GUIUtils.showErrorMessage(new InvalidAudienceCapacityException());
+            return null;
+        }
 
         Audiences au = new Audiences();
         au.setId(id);

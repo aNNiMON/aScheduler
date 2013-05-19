@@ -7,15 +7,17 @@ import com.annimon.scheduler.data.Groups;
 import com.annimon.scheduler.data.Pairs;
 import com.annimon.scheduler.data.Professors;
 import com.annimon.scheduler.data.Subjects;
+import com.annimon.scheduler.exceptions.EmptyFieldException;
 import com.annimon.scheduler.model.PairModel;
 import com.annimon.scheduler.util.GUIUtils;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
-import javax.swing.JTable;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
@@ -82,12 +84,14 @@ public class PairsForm extends AbstractEntityForm {
         
         dataEditorPanel.add(GUIUtils.createLabel("Начало"));
         timeStartSpinner = new JSpinner(new SpinnerDateModel());
+        timeStartSpinner.setEnabled(false);
         JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(timeStartSpinner, "HH:mm:ss");
         timeStartSpinner.setEditor(timeEditor);
         dataEditorPanel.add(timeStartSpinner);
         
         dataEditorPanel.add(GUIUtils.createLabel("Конец"));
         timeEndSpinner = new JSpinner(new SpinnerDateModel());
+        timeEndSpinner.setEnabled(false);
         timeEditor = new JSpinner.DateEditor(timeEndSpinner, "HH:mm:ss");
         timeEndSpinner.setEditor(timeEditor);
         dataEditorPanel.add(timeEndSpinner);
@@ -128,12 +132,13 @@ public class PairsForm extends AbstractEntityForm {
         groupComboBox.setModel(new DefaultComboBoxModel(name));
         dataEditorPanel.add(groupComboBox);
     }
-
+    
     @Override
-    protected void fillDataInEditorPanel(int rowSelected, JTable table) {
+    protected void fillComponentsInEditorPanel(int rowSelected) {
         numberSpinner.setValue(getValueAt(rowSelected, 1));
-        timeStartSpinner.setValue(getValueAt(rowSelected, 2));
-        timeEndSpinner.setValue(getValueAt(rowSelected, 3));
+        
+        timeStartSpinner.setValue(getTimeValue(rowSelected, 2));
+        timeEndSpinner.setValue(getTimeValue(rowSelected, 3));
         
         String day = getValueAt(rowSelected, 4).toString();
         int index = 0;
@@ -205,9 +210,25 @@ public class PairsForm extends AbstractEntityForm {
         if (weekIndex < 0) week = null;
         
         int audienceIndex = audienceComboBox.getSelectedIndex();
+        if ( (audienceIndex < 0) || (audienceIndex >= audiences.length) ) {
+            GUIUtils.showErrorMessage(new EmptyFieldException("Аудитория"));
+            return null;
+        }
         int subjectIndex = subjectComboBox.getSelectedIndex();
+        if ( (subjectIndex < 0) || (subjectIndex >= subjects.length) ) {
+            GUIUtils.showErrorMessage(new EmptyFieldException("Предмет"));
+            return null;
+        }
         int professorIndex = professorComboBox.getSelectedIndex();
+        if ( (professorIndex < 0) || (professorIndex >= professors.length) ) {
+            GUIUtils.showErrorMessage(new EmptyFieldException("Преподаватель"));
+            return null;
+        }
         int groupIndex = groupComboBox.getSelectedIndex();
+        if ( (groupIndex < 0) || (groupIndex >= groups.length) ) {
+            GUIUtils.showErrorMessage(new EmptyFieldException("Группа"));
+            return null;
+        }
         
         Pairs pr = new Pairs();
         pr.setId(id);
@@ -262,5 +283,15 @@ public class PairsForm extends AbstractEntityForm {
             array[i] = (Groups) entity;
         }
         return array;
+    }
+    
+    private Date getTimeValue(int rowSelected, int column) {
+        String time = (String) getValueAt(rowSelected, column);
+        if (time == null) return new Date();
+        try {
+            return new SimpleDateFormat("HH:mm:ss").parse(time);
+        } catch (ParseException ex) {
+            return null;
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.annimon.scheduler.util;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 
@@ -15,6 +16,12 @@ public class GUIUtils {
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setText(text);
         return label;
+    }
+    
+    public static void showErrorMessage(Throwable throwable) {
+        ExceptionHandler.handle(throwable);
+        JOptionPane.showMessageDialog(null, throwable.getMessage(), "Ошибка",
+                JOptionPane.ERROR_MESSAGE);
     }
     
     public static SpinnerNumberModel createShortSpinnerModel() {

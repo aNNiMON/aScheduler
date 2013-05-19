@@ -27,6 +27,8 @@ public abstract class EntityTableModel extends AbstractTableModel {
     }
     
     public void insert(Entity entity) {
+        if (entity == null) return;
+        
         int id = dao.insert(entity);
         entity.setId(id);
         
@@ -37,6 +39,8 @@ public abstract class EntityTableModel extends AbstractTableModel {
     }
     
     public void delete(int row, Entity entity) {
+        if (entity == null) return;
+        
         dao.delete(entity);
         
         entityList.remove(row);
@@ -45,6 +49,8 @@ public abstract class EntityTableModel extends AbstractTableModel {
     }
     
     public void update(int row, Entity entity) {
+        if (entity == null) return;
+        
         dao.update(entity);
         
         entityList.set(row, entity);

@@ -46,7 +46,7 @@ public class Audiences extends Entity {
     public String getFullNumber() {
         String text = " " + number;
         if ( (housing != null) && (housing != 0) ) {
-            text += " " + housing.toString();
+            text += " корп." + housing.toString();
         }
         return text;
     }

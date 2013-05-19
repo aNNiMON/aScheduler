@@ -46,6 +46,7 @@ public abstract class AbstractEntityForm extends JDialog {
         editButton = new JButton();
         JScrollPane tableScroll = new JScrollPane();
         
+        // Каждая таблица должна иметь возможность сортировки и одиночного выбора.
         table.setAutoCreateRowSorter(true);
         table.setModel(model);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -53,12 +54,12 @@ public abstract class AbstractEntityForm extends JDialog {
         tableScroll.setViewportView(table);
         getContentPane().add(tableScroll, BorderLayout.CENTER);
         
-        
+        // Панель данных заполняется в каждом классе-потомке.
         dataEditorPanel.setLayout(new GridLayout(0, 2));
         fillDataEditorPanel(dataEditorPanel);
         getContentPane().add(dataEditorPanel, BorderLayout.PAGE_END);
         
-        
+        // Панель команд для добавления/удаления/изменения данных едина для всех таблиц.
         commandsPanel.setLayout(new BoxLayout(commandsPanel, BoxLayout.PAGE_AXIS));
         
         addButton.setText("Добавить");
@@ -102,10 +103,24 @@ public abstract class AbstractEntityForm extends JDialog {
         pack();
     }
     
+    /**
+     * Заполнить панель изменения данных.
+     * @param dataEditor JPanel с макетом GridLayout(0, 2)
+     */
     protected abstract void fillDataEditorPanel(JPanel dataEditor);
     
-    protected abstract void fillDataInEditorPanel(int rowSelected, JTable table);
+    /**
+     * Заполнить компоненты панели данных из таблицы.
+     * @param rowSelected с какой строки таблицы брать данные.
+     */
+    protected abstract void fillComponentsInEditorPanel(int rowSelected);
     
+    /**
+     * Получить новый объект Entity из информации панели данных.
+     * @param row для какой строки таблицы делаются изменения.
+     * @param id идентификатор Entity.
+     * @return объект Entity.
+     */
     protected abstract Entity getEntity(int row, int id);
     
     protected Object getValueAt(int row, int column) {
@@ -121,6 +136,7 @@ public abstract class AbstractEntityForm extends JDialog {
         return getEntity(rowSelected, id);
     }
     
+    /** Слушатель события выбора строки таблицы. */
     private class RowListener implements ListSelectionListener {
         
         @Override
@@ -132,7 +148,8 @@ public abstract class AbstractEntityForm extends JDialog {
             int rowSelected = table.getSelectedRow();
             if (rowSelected == -1) return;
             
-            fillDataInEditorPanel(rowSelected, table);
+            // При выборе строки наполняем панель данных.
+            fillComponentsInEditorPanel(rowSelected);
         }
 
     }

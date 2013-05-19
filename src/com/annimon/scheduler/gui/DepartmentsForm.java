@@ -4,14 +4,15 @@ import com.annimon.scheduler.dao.DAOKeeper;
 import com.annimon.scheduler.data.Departments;
 import com.annimon.scheduler.data.Entity;
 import com.annimon.scheduler.data.Faculties;
+import com.annimon.scheduler.exceptions.EmptyFieldException;
 import com.annimon.scheduler.model.DepartmentModel;
 import com.annimon.scheduler.util.GUIUtils;
 import com.annimon.scheduler.util.JTextFieldLimit;
+import com.mysql.jdbc.StringUtils;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 
 /**
@@ -20,7 +21,7 @@ import javax.swing.JTextField;
  */
 public class DepartmentsForm extends AbstractEntityForm {
     
-    private JTextField nameTextFild;
+    private JTextField nameTextField;
     private JComboBox<String> facultyComboBox;
     
     private Faculties[] faculties;
@@ -34,9 +35,9 @@ public class DepartmentsForm extends AbstractEntityForm {
         faculties = getFacultiesArray();
         
         dataEditorPanel.add(GUIUtils.createLabel("Название"));
-        nameTextFild = new JTextField();
-        nameTextFild.setDocument(new JTextFieldLimit(255));
-        dataEditorPanel.add(nameTextFild);
+        nameTextField = new JTextField();
+        nameTextField.setDocument(new JTextFieldLimit(255));
+        dataEditorPanel.add(nameTextField);
 
         dataEditorPanel.add(GUIUtils.createLabel("Факультет"));
         facultyComboBox = new JComboBox<>();
@@ -49,8 +50,8 @@ public class DepartmentsForm extends AbstractEntityForm {
     }
 
     @Override
-    protected void fillDataInEditorPanel(int rowSelected, JTable table) {
-        nameTextFild.setText(getValueAt(rowSelected, 1).toString());
+    protected void fillComponentsInEditorPanel(int rowSelected) {
+        nameTextField.setText(getValueAt(rowSelected, 1).toString());
         String abbreviation = getValueAt(rowSelected, 2).toString();
         int index = 0;
         for (int i = 0; i < faculties.length; i++) {
@@ -63,11 +64,21 @@ public class DepartmentsForm extends AbstractEntityForm {
 
     @Override
     protected Entity getEntity(int row, int id) {
+        final String name = nameTextField.getText();
+        if (StringUtils.isNullOrEmpty(name)) {
+            GUIUtils.showErrorMessage(new EmptyFieldException("Название"));
+            return null;
+        }
+        
         int index = facultyComboBox.getSelectedIndex();
+        if ( (index < 0) || (index >= faculties.length) ) {
+            GUIUtils.showErrorMessage(new EmptyFieldException("Факультет"));
+            return null;
+        }
         
         Departments dp = new Departments();
         dp.setId(id);
-        dp.setName(nameTextFild.getText());
+        dp.setName(name);
         dp.setFacultyId(faculties[index].getId());
         
         return dp;

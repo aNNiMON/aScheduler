@@ -6,15 +6,17 @@ import com.annimon.scheduler.data.EducationForms;
 import com.annimon.scheduler.data.Entity;
 import com.annimon.scheduler.data.Groups;
 import com.annimon.scheduler.data.Specialities;
+import com.annimon.scheduler.exceptions.EmptyFieldException;
+import com.annimon.scheduler.exceptions.ValueOutOfRangeException;
 import com.annimon.scheduler.model.GroupModel;
 import com.annimon.scheduler.util.GUIUtils;
 import com.annimon.scheduler.util.JTextFieldLimit;
+import com.mysql.jdbc.StringUtils;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
@@ -24,7 +26,7 @@ import javax.swing.SpinnerNumberModel;
  */
 public class GroupsForm extends AbstractEntityForm {
     
-    private JTextField nameTextFild;
+    private JTextField nameTextField;
     private JSpinner yearSpinner, strengthSpinner;
     private JComboBox<String> specialityComboBox, departmentComboBox, educationFormComboBox;
     
@@ -43,9 +45,9 @@ public class GroupsForm extends AbstractEntityForm {
         educationForms = getEducationFormsArray();
         
         dataEditorPanel.add(GUIUtils.createLabel("Название"));
-        nameTextFild = new JTextField();
-        nameTextFild.setDocument(new JTextFieldLimit(255));
-        dataEditorPanel.add(nameTextFild);
+        nameTextField = new JTextField();
+        nameTextField.setDocument(new JTextFieldLimit(255));
+        dataEditorPanel.add(nameTextField);
 
         dataEditorPanel.add(GUIUtils.createLabel("Год создания"));
         yearSpinner = new JSpinner();
@@ -88,8 +90,8 @@ public class GroupsForm extends AbstractEntityForm {
     }
 
     @Override
-    protected void fillDataInEditorPanel(int rowSelected, JTable table) {
-        nameTextFild.setText(getValueAt(rowSelected, 1).toString());
+    protected void fillComponentsInEditorPanel(int rowSelected) {
+        nameTextField.setText(getValueAt(rowSelected, 1).toString());
         yearSpinner.setValue(Short.valueOf(getValueAt(rowSelected, 2).toString()));
         strengthSpinner.setValue(getValueAt(rowSelected, 3));
         
@@ -123,15 +125,38 @@ public class GroupsForm extends AbstractEntityForm {
 
     @Override
     protected Entity getEntity(int row, int id) {
+        final String name = nameTextField.getText();
+        if (StringUtils.isNullOrEmpty(name)) {
+            GUIUtils.showErrorMessage(new EmptyFieldException("Название"));
+            return null;
+        }
+        
         short year = (short) yearSpinner.getValue();
         short strength = (short) strengthSpinner.getValue();
+        if (strength > 125) {
+            GUIUtils.showErrorMessage(new ValueOutOfRangeException(strength, "> 125"));
+            return null;
+        }
+        
         int specialityIndex = specialityComboBox.getSelectedIndex();
+        if ( (specialityIndex < 0) || (specialityIndex >= specialities.length) ) {
+            GUIUtils.showErrorMessage(new EmptyFieldException("Специальность"));
+            return null;
+        }
         int departmentIndex = departmentComboBox.getSelectedIndex();
+        if ( (departmentIndex < 0) || (departmentIndex >= departments.length) ) {
+            GUIUtils.showErrorMessage(new EmptyFieldException("Кафедра"));
+            return null;
+        }
         int educationFormIndex = educationFormComboBox.getSelectedIndex();
+        if ( (educationFormIndex < 0) || (educationFormIndex >= educationForms.length) ) {
+            GUIUtils.showErrorMessage(new EmptyFieldException("Форма обучения"));
+            return null;
+        }
         
         Groups gr = new Groups();
         gr.setId(id);
-        gr.setName(nameTextFild.getText());
+        gr.setName(name);
         gr.setFormationYear(year);
         gr.setStrength(strength);
         gr.setSpecialityId(specialities[specialityIndex].getId());

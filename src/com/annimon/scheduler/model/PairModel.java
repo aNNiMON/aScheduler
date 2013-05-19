@@ -3,13 +3,13 @@ package com.annimon.scheduler.model;
 import com.annimon.scheduler.dao.DAOKeeper;
 import com.annimon.scheduler.dao.IDAO;
 import com.annimon.scheduler.data.Audiences;
-import com.annimon.scheduler.data.EducationForms;
 import com.annimon.scheduler.data.Entity;
 import com.annimon.scheduler.data.Groups;
 import com.annimon.scheduler.data.Pairs;
 import com.annimon.scheduler.data.Professors;
 import com.annimon.scheduler.data.Subjects;
 import com.annimon.scheduler.util.DBConnection;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -50,6 +50,16 @@ public class PairModel extends EntityTableModel {
         if (pr.getWeek() == null) weekIndex = 0;
         else weekIndex = pr.getWeek() + 1;
         
+        String timeBegin = null;
+        if (pr.getTimeBegin() != null) {
+            timeBegin = new SimpleDateFormat("HH:mm:ss").format(pr.getTimeBegin());
+        }
+        
+        String timeEnd = null;
+        if (pr.getTimeBegin() != null) {
+            timeEnd = new SimpleDateFormat("HH:mm:ss").format(pr.getTimeEnd());
+        }
+        
         String audience;
         String sql = "SELECT * FROM audiences WHERE id = ?";
         List<Entity> list = DBConnection.getInstance().executeQuery(sql, new Object[] {
@@ -81,8 +91,8 @@ public class PairModel extends EntityTableModel {
         return new Object[] {
             pr.getId(),
             pr.getNumber(),
-            pr.getTimeBegin(),
-            pr.getTimeEnd(),
+            timeBegin,
+            timeEnd,
             DAY_NAMES[pr.getDay() - 1],
             WEEK_NAMES[weekIndex],
             audience,

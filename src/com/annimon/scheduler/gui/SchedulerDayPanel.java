@@ -9,7 +9,9 @@ import com.annimon.scheduler.data.Subjects;
 import com.annimon.scheduler.util.DBConnection;
 import java.awt.Color;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -28,8 +30,23 @@ public class SchedulerDayPanel extends JPanel {
     public void addSchedulerPairPanel(Pairs[] pairs) {
         if (pairs.length == 0) add(createEmptyPair());
         
+        // Группируем пары по номерам и создаём в них панель пар.
+        HashMap<Short, SchedulerPairPanel> map = new HashMap<>();
         for (int i = 0; i < pairs.length; i++) {
-            add(createSchedulerPair(pairs[i]));
+            Pairs pair = pairs[i];
+            Short number = pair.getNumber();
+            if (map.containsKey(number)) {
+                SchedulerPairPanel panel = map.get(number);
+                fillPairPanel(panel, pair);
+                map.put(number, panel);
+            } else {
+                map.put(number, createSchedulerPair(pairs[i]));
+            }
+        }
+        
+        for (Map.Entry<Short, SchedulerPairPanel> entry : map.entrySet()) {
+            SchedulerPairPanel panel = entry.getValue();
+            add(panel);
         }
     }
     
@@ -70,7 +87,7 @@ public class SchedulerDayPanel extends JPanel {
         String professor;
         sql = "SELECT * FROM professors WHERE id = ?";
         list = DBConnection.getInstance().executeQuery(sql, new Object[] {
-            pair.getAudienceId()
+            pair.getProfessorId()
         },  DAOKeeper.getProfessorDAO().getResultSetHandler());
         professor = ((Professors) list.get(0)).getName();
         
