@@ -1,7 +1,5 @@
 package com.annimon.scheduler.data;
 
-import java.util.Date;
-
 /**
  * Группы.
  * @author aNNiMON
@@ -9,9 +7,9 @@ import java.util.Date;
 public class Groups extends Entity {
 
     private String name;
-    private Date formationYear;
+    private Short formationYear;
     private short strength;
-    private Integer educationFormId;
+    private Short educationFormId;
     //private EducationForms educationForm;
     private Integer specialityId;
     //private Specialities speciality;
@@ -26,11 +24,11 @@ public class Groups extends Entity {
         this.name = name;
     }
 
-    public Date getFormationYear() {
+    public Short getFormationYear() {
         return formationYear;
     }
 
-    public void setFormationYear(Date formationYear) {
+    public void setFormationYear(Short formationYear) {
         this.formationYear = formationYear;
     }
 
@@ -42,20 +40,13 @@ public class Groups extends Entity {
         this.strength = strength;
     }
 
-    public Integer getEducationFormId() {
+    public Short getEducationFormId() {
         return educationFormId;
     }
     
-    public void setEducationFormId(Integer educationFormId) {
+    public void setEducationFormId(Short educationFormId) {
         this.educationFormId = educationFormId;
     }
-    /*public EducationForms getEducationForm() {
-        return educationForm;
-    }
-
-    public void setEducationForm(EducationForms educationForm) {
-        this.educationForm = educationForm;
-    }*/
 
     public Integer getSpecialityId() {
         return specialityId;
@@ -65,14 +56,6 @@ public class Groups extends Entity {
         this.specialityId = specialityId;
     }
     
-    /*public Specialities getSpeciality() {
-        return speciality;
-    }
-
-    public void setSpeciality(Specialities speciality) {
-        this.speciality = speciality;
-    }*/
-    
     public Integer getDepartmentId() {
         return departmentId;
     }
@@ -80,13 +63,7 @@ public class Groups extends Entity {
     public void setDepartmentId(Integer departmentId) {
         this.departmentId = departmentId;
     }
-
-    /*public Departments getDepartment() {
-    return department;
-    }
-    public void setDepartment(Departments department) {
-    this.department = department;
-    }*/
+    
     @Override
     public String toString() {
         return "Groups{" + "name=" + name + ", formationYear=" + formationYear + ", strength=" + strength + ", educationFormId=" + educationFormId + ", specialityId=" + specialityId + ", departmentId=" + departmentId + '}';

@@ -5,7 +5,6 @@ import com.annimon.scheduler.data.Departments;
 import com.annimon.scheduler.data.Entity;
 import com.annimon.scheduler.data.Faculties;
 import com.annimon.scheduler.model.DepartmentModel;
-import com.annimon.scheduler.model.SubjectModel;
 import com.annimon.scheduler.util.GUIUtils;
 import com.annimon.scheduler.util.JTextFieldLimit;
 import java.util.List;

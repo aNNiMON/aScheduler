@@ -21,10 +21,10 @@ public class GroupDAO implements IDAO {
             gr.setId(rs.getInt(1));
             gr.setSpecialityId(rs.getInt(2));
             gr.setName(rs.getString(3));
-            gr.setFormationYear(rs.getDate(4));
+            gr.setFormationYear(rs.getShort(4));
             gr.setStrength(rs.getShort(5));
             gr.setDepartmentId(rs.getInt(6));
-            gr.setEducationFormId(rs.getInt(7));
+            gr.setEducationFormId(rs.getShort(7));
             return gr;
         }
     };

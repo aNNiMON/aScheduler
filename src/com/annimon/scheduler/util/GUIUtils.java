@@ -21,4 +21,9 @@ public class GUIUtils {
         return new SpinnerNumberModel(
             Short.valueOf((short)0), Short.valueOf((short)0), null, Short.valueOf((short)1));
     }
+    
+    public static SpinnerNumberModel createShortSpinnerModel(short min) {
+        return new SpinnerNumberModel(Short.valueOf(min),
+                Short.valueOf(min), null, Short.valueOf((short)1));
+    }
 }
