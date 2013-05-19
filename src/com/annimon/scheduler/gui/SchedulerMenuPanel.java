@@ -18,7 +18,7 @@ public class SchedulerMenuPanel extends JPanel {
     private static final Dimension MIN_BUTTON_DIMENSION = new Dimension(70, 23);
     
     private enum ButtonId {
-        AUDIENCES, PROFESSORS,
+        AUDIENCES, PROFESSORS, SUBJECTS,
         HELP, ABOUT, EXIT
     };
     
@@ -30,6 +30,7 @@ public class SchedulerMenuPanel extends JPanel {
         tableButtonsPanel.setLayout(new BoxLayout(tableButtonsPanel, BoxLayout.PAGE_AXIS));
         tableButtonsPanel.add(createButton("Аудитории", ButtonId.AUDIENCES));
         tableButtonsPanel.add(createButton("Преподаватели", ButtonId.PROFESSORS));
+        tableButtonsPanel.add(createButton("Предметы", ButtonId.SUBJECTS));
         add(tableButtonsPanel, BorderLayout.CENTER);
 
         // Кнопки управления.
@@ -60,10 +61,13 @@ public class SchedulerMenuPanel extends JPanel {
     private void onButtonClick(ButtonId id) {
         switch (id) {
             case AUDIENCES:
-                new AudienceForm().setVisible(true);
+                new AudiencesForm().setVisible(true);
                 break;
             case PROFESSORS:
                 new ProfessorsForm().setVisible(true);
+                break;
+            case SUBJECTS:
+                new SubjectsForm().setVisible(true);
                 break;
                 
             case HELP:

@@ -32,4 +32,11 @@ public class ExceptionHandler {
             handle(throwable);
         }
     }
+    
+    public static void handle(String comment) {
+        if (mode == HANDLE_MODE.LOG_STACK_TRACE) {
+            System.out.println(comment);
+            handle(new Throwable(comment));
+        }
+    }
 }

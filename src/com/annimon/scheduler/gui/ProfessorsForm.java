@@ -5,6 +5,7 @@ import com.annimon.scheduler.data.Entity;
 import com.annimon.scheduler.data.Professors;
 import com.annimon.scheduler.model.ProfessorModel;
 import com.annimon.scheduler.util.GUIUtils;
+import com.annimon.scheduler.util.JTextFieldLimit;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -15,7 +16,7 @@ import javax.swing.JTextField;
  */
 public class ProfessorsForm extends AbstractEntityForm {
     
-    private JTextField lastnameTextFild, firstnameTextField, middlenameTextField;
+    private JTextField lastnameTextField, firstnameTextField, middlenameTextField;
 
     public ProfessorsForm() {
         super(new ProfessorModel(new ProfessorDAO()));
@@ -24,21 +25,24 @@ public class ProfessorsForm extends AbstractEntityForm {
     @Override
     protected void fillDataEditorPanel(JPanel dataEditorPanel) {
         dataEditorPanel.add(GUIUtils.createLabel("Фамилия"));
-        lastnameTextFild = new JTextField();
-        dataEditorPanel.add(lastnameTextFild);
+        lastnameTextField = new JTextField();
+        lastnameTextField.setDocument(new JTextFieldLimit(255));
+        dataEditorPanel.add(lastnameTextField);
 
         dataEditorPanel.add(GUIUtils.createLabel("Имя"));
         firstnameTextField = new JTextField();
+        firstnameTextField.setDocument(new JTextFieldLimit(255));
         dataEditorPanel.add(firstnameTextField);
 
         dataEditorPanel.add(GUIUtils.createLabel("Отчество"));
         middlenameTextField = new JTextField();
+        middlenameTextField.setDocument(new JTextFieldLimit(255));
         dataEditorPanel.add(middlenameTextField);
     }
 
     @Override
     protected void fillDataInEditorPanel(int rowSelected, JTable table) {
-        lastnameTextFild.setText(getValueAt(rowSelected, 1).toString());
+        lastnameTextField.setText(getValueAt(rowSelected, 1).toString());
         firstnameTextField.setText(getValueAt(rowSelected, 2).toString());
         middlenameTextField.setText(getValueAt(rowSelected, 3).toString());
     }
@@ -47,7 +51,7 @@ public class ProfessorsForm extends AbstractEntityForm {
     protected Entity getEntity(int row, int id) {
         Professors pr = new Professors();
         pr.setId(id);
-        pr.setLastname(lastnameTextFild.getText());
+        pr.setLastname(lastnameTextField.getText());
         pr.setFirstname(firstnameTextField.getText());
         pr.setMiddlename(middlenameTextField.getText());
         

@@ -15,13 +15,13 @@ import javax.swing.JTable;
  * Форма редактирования аудиторий.
  * @author aNNiMON
  */
-public class AudienceForm extends AbstractEntityForm {
+public class AudiencesForm extends AbstractEntityForm {
     
     private JSpinner capacitySpinner, housingSpinner;
     private JSpinner numberSpinner;
     private JComboBox typeComboBox;
 
-    public AudienceForm() {
+    public AudiencesForm() {
         super(new AudienceModel(new AudienceDAO()));
     }
 

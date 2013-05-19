@@ -4,7 +4,7 @@ import com.annimon.scheduler.dao.IDAO;
 import com.annimon.scheduler.data.Professors;
 
 /**
- * Модель таблицы аудиторий.
+ * Модель таблицы преподавателей.
  * @author aNNiMON
  */
 public class ProfessorModel extends EntityTableModel {
