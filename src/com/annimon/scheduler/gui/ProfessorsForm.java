@@ -1,6 +1,6 @@
 package com.annimon.scheduler.gui;
 
-import com.annimon.scheduler.dao.ProfessorDAO;
+import com.annimon.scheduler.dao.DAOKeeper;
 import com.annimon.scheduler.data.Entity;
 import com.annimon.scheduler.data.Professors;
 import com.annimon.scheduler.model.ProfessorModel;
@@ -19,7 +19,7 @@ public class ProfessorsForm extends AbstractEntityForm {
     private JTextField lastnameTextField, firstnameTextField, middlenameTextField;
 
     public ProfessorsForm() {
-        super(new ProfessorModel(new ProfessorDAO()));
+        super(new ProfessorModel(DAOKeeper.getProfessorDAO()));
     }
 
     @Override

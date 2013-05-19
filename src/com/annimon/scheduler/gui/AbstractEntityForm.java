@@ -10,12 +10,10 @@ import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -25,7 +23,7 @@ import javax.swing.event.ListSelectionListener;
  */
 public abstract class AbstractEntityForm extends JFrame {
     
-    private static final Dimension MAX_BUTTON_DIMENSION = new Dimension(85, 23);
+    private static final Dimension MAX_BUTTON_DIMENSION = new Dimension(85, 30);
 
     private JTable table;
     private JButton addButton, deleteButton, editButton;

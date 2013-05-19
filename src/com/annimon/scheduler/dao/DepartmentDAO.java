@@ -2,7 +2,6 @@ package com.annimon.scheduler.dao;
 
 import com.annimon.scheduler.data.Departments;
 import com.annimon.scheduler.data.Entity;
-import com.annimon.scheduler.data.Faculties;
 import com.annimon.scheduler.util.DBConnection;
 import com.annimon.scheduler.util.IResultSetHandler;
 import java.sql.ResultSet;

@@ -1,8 +1,6 @@
 package com.annimon.scheduler.gui;
 
-import com.annimon.scheduler.dao.AudienceDAO;
-import com.annimon.scheduler.dao.ProfessorDAO;
-import com.annimon.scheduler.dao.SubjectDAO;
+import com.annimon.scheduler.dao.DAOKeeper;
 import com.annimon.scheduler.data.Audiences;
 import com.annimon.scheduler.data.Entity;
 import com.annimon.scheduler.data.Pairs;
@@ -59,14 +57,14 @@ public class SchedulerDayPanel extends JPanel {
         String sql = "SELECT * FROM subjects WHERE id = ?";
         List<Entity> list = DBConnection.getInstance().executeQuery(sql, new Object[] {
             pair.getSubjectId()
-        }, new SubjectDAO().getResultSetHandler());
+        },  DAOKeeper.getSubjectDAO().getResultSetHandler());
         subject = ((Subjects) list.get(0)).getAbbreviation();
         
         String audience;
         sql = "SELECT * FROM audiences WHERE id = ?";
         list = DBConnection.getInstance().executeQuery(sql, new Object[] {
             pair.getAudienceId()
-        }, new AudienceDAO().getResultSetHandler());
+        }, DAOKeeper.getAudienceDAO().getResultSetHandler());
         Audiences au = (Audiences) list.get(0);
         audience = " " + au.getNumber();
         if (au.getHousing() != 0) audience += " " + au.getHousing();
@@ -75,7 +73,7 @@ public class SchedulerDayPanel extends JPanel {
         sql = "SELECT * FROM professors WHERE id = ?";
         list = DBConnection.getInstance().executeQuery(sql, new Object[] {
             pair.getAudienceId()
-        }, new ProfessorDAO().getResultSetHandler());
+        },  DAOKeeper.getProfessorDAO().getResultSetHandler());
         professor = ((Professors) list.get(0)).getName();
         
         panel.addSubject(week, subject, audience, professor);

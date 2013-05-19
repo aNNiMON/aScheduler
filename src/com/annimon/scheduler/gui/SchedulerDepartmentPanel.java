@@ -1,6 +1,6 @@
 package com.annimon.scheduler.gui;
 
-import com.annimon.scheduler.dao.PairDAO;
+import com.annimon.scheduler.dao.DAOKeeper;
 import com.annimon.scheduler.data.Entity;
 import com.annimon.scheduler.data.Groups;
 import com.annimon.scheduler.data.Pairs;
@@ -51,7 +51,7 @@ public class SchedulerDepartmentPanel extends JPanel {
         String sql = "SELECT * FROM pairs WHERE `group` = ? AND `day` = ?";
         List<Entity> pairsList = DBConnection.getInstance().executeQuery(sql, new Object[] {
             group.getId(), day
-        }, new PairDAO().getResultSetHandler());
+        }, DAOKeeper.getPairDAO().getResultSetHandler());
         
         final int size = pairsList.size();
         Pairs[] pairs = new Pairs[size];

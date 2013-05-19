@@ -14,11 +14,12 @@ import javax.swing.JPanel;
  */
 public class SchedulerMenuPanel extends JPanel {
     
-    private static final Dimension MAX_BUTTON_DIMENSION = new Dimension(150, 23);
-    private static final Dimension MIN_BUTTON_DIMENSION = new Dimension(70, 23);
+    private static final Dimension MAX_BUTTON_DIMENSION = new Dimension(150, 30);
     
     private enum ButtonId {
-        AUDIENCES, PROFESSORS, SUBJECTS, FACULTIES,
+        REFRESH,
+        AUDIENCES, PROFESSORS, SUBJECTS,
+        FACULTIES, DEPARTMENTS,
         HELP, ABOUT, EXIT
     };
     
@@ -28,10 +29,12 @@ public class SchedulerMenuPanel extends JPanel {
         // Кнопки работы с таблицами.
         JPanel tableButtonsPanel = new JPanel();
         tableButtonsPanel.setLayout(new BoxLayout(tableButtonsPanel, BoxLayout.PAGE_AXIS));
+        tableButtonsPanel.add(createButton("Обновить", ButtonId.REFRESH));
         tableButtonsPanel.add(createButton("Аудитории", ButtonId.AUDIENCES));
         tableButtonsPanel.add(createButton("Преподаватели", ButtonId.PROFESSORS));
         tableButtonsPanel.add(createButton("Предметы", ButtonId.SUBJECTS));
         tableButtonsPanel.add(createButton("Факультеты", ButtonId.FACULTIES));
+        tableButtonsPanel.add(createButton("Кафедры", ButtonId.DEPARTMENTS));
         add(tableButtonsPanel, BorderLayout.CENTER);
 
         // Кнопки управления.
@@ -48,7 +51,6 @@ public class SchedulerMenuPanel extends JPanel {
         JButton button = new JButton();
         button.setText(text);
         button.setMaximumSize(MAX_BUTTON_DIMENSION);
-        button.setMinimumSize(MIN_BUTTON_DIMENSION);
         button.addActionListener(new ActionListener() {
 
             @Override
@@ -61,6 +63,9 @@ public class SchedulerMenuPanel extends JPanel {
     
     private void onButtonClick(ButtonId id) {
         switch (id) {
+            case REFRESH:
+                SchedulerPanel.getInstance().refreshScheduler();
+                break;
             case AUDIENCES:
                 new AudiencesForm().setVisible(true);
                 break;
@@ -72,6 +77,9 @@ public class SchedulerMenuPanel extends JPanel {
                 break;
             case FACULTIES:
                 new FacultiesForm().setVisible(true);
+                break;
+            case DEPARTMENTS:
+                new DepartmentsForm().setVisible(true);
                 break;
                 
             case HELP:

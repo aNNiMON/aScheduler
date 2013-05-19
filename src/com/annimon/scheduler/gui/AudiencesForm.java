@@ -1,6 +1,6 @@
 package com.annimon.scheduler.gui;
 
-import com.annimon.scheduler.dao.AudienceDAO;
+import com.annimon.scheduler.dao.DAOKeeper;
 import com.annimon.scheduler.data.Audiences;
 import com.annimon.scheduler.data.Entity;
 import com.annimon.scheduler.model.AudienceModel;
@@ -22,7 +22,7 @@ public class AudiencesForm extends AbstractEntityForm {
     private JComboBox typeComboBox;
 
     public AudiencesForm() {
-        super(new AudienceModel(new AudienceDAO()));
+        super(new AudienceModel(DAOKeeper.getAudienceDAO()));
     }
 
     @Override

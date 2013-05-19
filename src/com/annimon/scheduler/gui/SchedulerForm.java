@@ -1,15 +1,11 @@
 package com.annimon.scheduler.gui;
 
-import com.annimon.scheduler.dao.FacultyDAO;
-import com.annimon.scheduler.data.Entity;
-import com.annimon.scheduler.data.Faculties;
 import com.annimon.scheduler.util.DBConnection;
 import com.annimon.scheduler.util.ExceptionHandler;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -22,7 +18,8 @@ import javax.swing.WindowConstants;
 public class SchedulerForm extends JFrame {
     
     public SchedulerForm() {
-        SchedulerPanel schedulerPanel = new SchedulerPanel(getFacultiesArray());
+        setTitle("aScheduler - редактор расписания");
+        SchedulerPanel schedulerPanel = new SchedulerPanel();
         SchedulerMenuPanel schedulerMenuPanel = new SchedulerMenuPanel();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -38,17 +35,6 @@ public class SchedulerForm extends JFrame {
         pack();
     }
     
-    private Faculties[] getFacultiesArray() {
-        FacultyDAO faculty = new FacultyDAO();
-        List<Entity> facultiesList = faculty.select();
-        Faculties[] array = new Faculties[facultiesList.size()];
-        for (int i = 0; i < facultiesList.size(); i++) {
-            Entity entity = facultiesList.get(i);
-            array[i] = (Faculties) entity;
-        }
-        return array;
-    }
-
     public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         try {

@@ -1,6 +1,6 @@
 package com.annimon.scheduler.gui;
 
-import com.annimon.scheduler.dao.GroupDAO;
+import com.annimon.scheduler.dao.DAOKeeper;
 import com.annimon.scheduler.data.Departments;
 import com.annimon.scheduler.data.Entity;
 import com.annimon.scheduler.data.Groups;
@@ -40,7 +40,7 @@ public class SchedulerFacultyPanel extends JPanel {
         String sql = "SELECT * FROM groups WHERE department = ?";
         List<Entity> groupsList = DBConnection.getInstance().executeQuery(sql, new Object[] {
             departments.getId()
-        }, new GroupDAO().getResultSetHandler());
+        }, DAOKeeper.getGroupDAO().getResultSetHandler());
         
         SchedulerDepartmentPanel departmentPanel = new SchedulerDepartmentPanel();
         for (Entity entity : groupsList) {
