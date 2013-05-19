@@ -1,9 +1,9 @@
 package com.annimon.scheduler.gui;
 
-import com.annimon.scheduler.dao.SubjectDAO;
+import com.annimon.scheduler.dao.FacultyDAO;
 import com.annimon.scheduler.data.Entity;
-import com.annimon.scheduler.data.Subjects;
-import com.annimon.scheduler.model.SubjectModel;
+import com.annimon.scheduler.data.Faculties;
+import com.annimon.scheduler.model.FacultyModel;
 import com.annimon.scheduler.util.GUIUtils;
 import com.annimon.scheduler.util.JTextFieldLimit;
 import javax.swing.JPanel;
@@ -11,15 +11,15 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 /**
- * Форма редактирования предметов.
+ * Форма редактирования факультетов.
  * @author aNNiMON
  */
-public class SubjectsForm extends AbstractEntityForm {
+public class FacultiesForm extends AbstractEntityForm {
     
     private JTextField nameTextFild, abbreviationTextField;
 
-    public SubjectsForm() {
-        super(new SubjectModel(new SubjectDAO()));
+    public FacultiesForm() {
+        super(new FacultyModel(new FacultyDAO()));
     }
 
     @Override
@@ -31,7 +31,7 @@ public class SubjectsForm extends AbstractEntityForm {
 
         dataEditorPanel.add(GUIUtils.createLabel("Сокращение"));
         abbreviationTextField = new JTextField();
-        abbreviationTextField.setDocument(new JTextFieldLimit(12));
+        abbreviationTextField.setDocument(new JTextFieldLimit(10));
         dataEditorPanel.add(abbreviationTextField);
     }
 
@@ -43,11 +43,11 @@ public class SubjectsForm extends AbstractEntityForm {
 
     @Override
     protected Entity getEntity(int row, int id) {
-        Subjects sb = new Subjects();
-        sb.setId(id);
-        sb.setName(nameTextFild.getText());
-        sb.setAbbreviation(abbreviationTextField.getText());
+        Faculties fc = new Faculties();
+        fc.setId(id);
+        fc.setName(nameTextFild.getText());
+        fc.setAbbreviation(abbreviationTextField.getText());
         
-        return sb;
+        return fc;
     }
 }
