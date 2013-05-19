@@ -39,7 +39,7 @@ public class SchedulerDepartmentPanel extends JPanel {
     private SchedulerGroupPanel createScheduleTableDay(Groups groups) {
         SchedulerGroupPanel groupPanel = new SchedulerGroupPanel();
         for (int day = 1; day <= 6; day++) {
-            groupPanel.addSchedulerDayPanel(day, getPairsAtDay(groups, day));
+            groupPanel.addSchedulerDayPanel(getPairsAtDay(groups, day));
         }
         return groupPanel;
     }

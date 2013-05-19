@@ -44,7 +44,7 @@ public class PairDAO implements IDAO {
         Pairs pr = cast(entity);
         
         String sql = "INSERT INTO pairs(id, number, time_begin, time_end, day, " + 
-                "week, audience, subject, professor, group) " +
+                "week, audience, subject, professor, `group`) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
             pr.getId(), pr.getNumber(), pr.getTimeBegin(), pr.getTimeEnd(), pr.getDay(),
@@ -60,7 +60,7 @@ public class PairDAO implements IDAO {
         
         String sql = "UPDATE pairs SET number = ?, time_begin = ?, time_end = ?, " +
                 "day = ?, week = ?, audience = ?, subject = ?, " +
-                "professor = ?, group = ? WHERE id = ?";
+                "professor = ?, `group` = ? WHERE id = ?";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
             pr.getNumber(), pr.getTimeBegin(), pr.getTimeEnd(),
             pr.getDay(), pr.getWeek(), pr.getAudienceId(), pr.getSubjectId(),

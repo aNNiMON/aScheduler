@@ -60,7 +60,9 @@ public class SchedulerPanel extends JPanel {
 
         add(facultyChoosePanel, BorderLayout.NORTH);
 
-        createScheduleTableDepartment(faculties[0]);
+        if (faculties.length > 0) {
+            createScheduleTableDepartment(faculties[0]);
+        }
     }
     
     public static SchedulerPanel getInstance() {

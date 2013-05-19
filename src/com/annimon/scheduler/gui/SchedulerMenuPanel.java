@@ -18,7 +18,7 @@ public class SchedulerMenuPanel extends JPanel {
     
     private enum ButtonId {
         REFRESH,
-        AUDIENCES, PROFESSORS, SUBJECTS,
+        AUDIENCES, PROFESSORS, SUBJECTS, PAIRS,
         FACULTIES, DEPARTMENTS, GROUPS,
         HELP, ABOUT, EXIT
     };
@@ -33,6 +33,7 @@ public class SchedulerMenuPanel extends JPanel {
         tableButtonsPanel.add(createButton("Аудитории", ButtonId.AUDIENCES));
         tableButtonsPanel.add(createButton("Преподаватели", ButtonId.PROFESSORS));
         tableButtonsPanel.add(createButton("Предметы", ButtonId.SUBJECTS));
+        tableButtonsPanel.add(createButton("Пары", ButtonId.PAIRS));
         tableButtonsPanel.add(createButton("Факультеты", ButtonId.FACULTIES));
         tableButtonsPanel.add(createButton("Кафедры", ButtonId.DEPARTMENTS));
         tableButtonsPanel.add(createButton("Группы", ButtonId.GROUPS));
@@ -75,6 +76,9 @@ public class SchedulerMenuPanel extends JPanel {
                 break;
             case SUBJECTS:
                 new SubjectsForm().setVisible(true);
+                break;
+            case PAIRS:
+                new PairsForm().setVisible(true);
                 break;
             case FACULTIES:
                 new FacultiesForm().setVisible(true);

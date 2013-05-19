@@ -17,7 +17,7 @@ public class SchedulerGroupPanel extends JPanel {
         setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
     }
     
-    public void addSchedulerDayPanel(int day, Pairs[] pairs) {
+    public void addSchedulerDayPanel(Pairs[] pairs) {
         SchedulerDayPanel dayPanel = new SchedulerDayPanel();
         dayPanel.addSchedulerPairPanel(pairs);
         add(dayPanel);

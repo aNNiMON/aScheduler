@@ -65,9 +65,7 @@ public class SchedulerDayPanel extends JPanel {
         list = DBConnection.getInstance().executeQuery(sql, new Object[] {
             pair.getAudienceId()
         }, DAOKeeper.getAudienceDAO().getResultSetHandler());
-        Audiences au = (Audiences) list.get(0);
-        audience = " " + au.getNumber();
-        if (au.getHousing() != 0) audience += " " + au.getHousing();
+        audience = ((Audiences) list.get(0)).getFullNumber();
         
         String professor;
         sql = "SELECT * FROM professors WHERE id = ?";
