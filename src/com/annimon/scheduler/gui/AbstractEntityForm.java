@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -21,7 +21,7 @@ import javax.swing.event.ListSelectionListener;
  * Макет формы для всех сущностей.
  * @author aNNiMON
  */
-public abstract class AbstractEntityForm extends JFrame {
+public abstract class AbstractEntityForm extends JDialog {
     
     private static final Dimension MAX_BUTTON_DIMENSION = new Dimension(85, 30);
 
@@ -33,6 +33,7 @@ public abstract class AbstractEntityForm extends JFrame {
 
     public AbstractEntityForm(EntityTableModel model) {
         this.model = model;
+        setModal(true);
         initComponents();
     }
     
