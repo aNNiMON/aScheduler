@@ -24,7 +24,8 @@ public class SchedulerDayPanel extends JPanel {
 
     public SchedulerDayPanel() {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+        Color bg = getBackground();
+        setBorder(BorderFactory.createMatteBorder(15, 0, 0, 0, bg.darker()));
     }
     
     public void addSchedulerPairPanel(Pairs[] pairs) {

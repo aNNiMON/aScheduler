@@ -1,6 +1,9 @@
 package com.annimon.scheduler.util;
 
 import com.annimon.scheduler.data.Entity;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -11,6 +14,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Подключение к базе данных.
@@ -29,7 +34,7 @@ public class DBConnection {
     }
     
     
-    private static final String PROPERTY_RESOURCE = "/db.properties";
+    private static final String PROPERTY_RESOURCE = "db.properties";
     
     private Connection connection;
     private PreparedStatement statement;
@@ -167,12 +172,28 @@ public class DBConnection {
     }
     
     private void readProperties() {
-        InputStream stream = getClass().getResourceAsStream(PROPERTY_RESOURCE);
+        // Если рядом с приложением нет файла db.properties, то читаем из ресурсов.
+        InputStream stream = getInputStreamFromFile();
+        if (stream == null) {
+            stream = getClass().getResourceAsStream("/" + PROPERTY_RESOURCE);
+        }
         try {
             dbProperties.load(stream);
             stream.close();
         } catch (IOException ex) {
             ExceptionHandler.handle(ex, "read db property");
         }
+    }
+    
+    private InputStream getInputStreamFromFile() {
+        File file = new File(PROPERTY_RESOURCE);
+        if (file.exists()) {
+            try {
+                return new FileInputStream(file);
+            } catch (FileNotFoundException ex) {
+                return null;
+            }
+        }
+        return null;
     }
 }
