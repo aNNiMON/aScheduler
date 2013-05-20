@@ -29,7 +29,7 @@ public class AudienceDAO implements IDAO {
 
     @Override
     public List<Entity> select() {
-        String sql = "SELECT * FROM audiences";
+        String sql = "SELECT * FROM audiences ORDER BY `number`";
         List<Entity> resultList = DBConnection.getInstance().executeQuery(sql, null, handler);
 	return resultList;
     }

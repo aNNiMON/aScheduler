@@ -27,7 +27,7 @@ public class DepartmentDAO implements IDAO {
 
     @Override
     public List<Entity> select() {
-        String sql = "SELECT * FROM departments";
+        String sql = "SELECT * FROM departments ORDER BY `name`";
         List<Entity> resultList = DBConnection.getInstance().executeQuery(sql, null, handler);
 	return resultList;
     }

@@ -27,7 +27,7 @@ public class SubjectDAO implements IDAO {
 
     @Override
     public List<Entity> select() {
-        String sql = "SELECT * FROM subjects";
+        String sql = "SELECT * FROM subjects ORDER BY `name`";
         List<Entity> resultList = DBConnection.getInstance().executeQuery(sql, null, handler);
 	return resultList;
     }

@@ -26,7 +26,7 @@ public class EducationFormDAO implements IDAO {
 
     @Override
     public List<Entity> select() {
-        String sql = "SELECT * FROM education_forms";
+        String sql = "SELECT * FROM education_forms ORDER BY `type`";
         List<Entity> resultList = DBConnection.getInstance().executeQuery(sql, null, handler);
 	return resultList;
     }

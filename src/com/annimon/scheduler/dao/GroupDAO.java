@@ -31,7 +31,7 @@ public class GroupDAO implements IDAO {
 
     @Override
     public List<Entity> select() {
-        String sql = "SELECT * FROM groups";
+        String sql = "SELECT * FROM groups ORDER BY `name`";
         List<Entity> resultList = DBConnection.getInstance().executeQuery(sql, null, handler);
 	return resultList;
     }
