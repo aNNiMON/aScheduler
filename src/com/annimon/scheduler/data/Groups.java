@@ -10,11 +10,8 @@ public class Groups extends Entity {
     private Short formationYear;
     private short strength;
     private Short educationFormId;
-    //private EducationForms educationForm;
     private Integer specialityId;
-    //private Specialities speciality;
     private Integer departmentId;
-    //private Departments department;
     
     public String getName() {
         return name;

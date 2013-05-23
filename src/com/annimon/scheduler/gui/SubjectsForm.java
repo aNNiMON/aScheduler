@@ -9,7 +9,6 @@ import com.annimon.scheduler.util.GUIUtils;
 import com.annimon.scheduler.util.JTextFieldLimit;
 import com.mysql.jdbc.StringUtils;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 
 /**

@@ -10,6 +10,27 @@
 <project name="aScheduler" default="default" basedir=".">
     <description>Builds, tests, and runs the project aScheduler.</description>
     <import file="nbproject/build-impl.xml"/>
+    
+    <target name="-post-jar">
+	    <property name="proguard.jar.path" value="E:/SETUPS/Disk/Programming/Java/proguard4.9beta1/lib/proguard.jar" />
+	    <property name="java.home.path" value="D:/Program Files (x86)/Java/jdk1.7.0_09" />
+	    
+	    <echo message="Obfuscating ${dist.jar}..." />
+	    <mkdir dir="${build.dir}/obfuscated" />
+	    
+	    <taskdef resource="proguard/ant/task.properties"
+	             classpath="${proguard.jar.path}" />
+	    
+	    <proguard configuration="E:/SETUPS/Disk/Programming/Java/java.pro">
+	    
+	        <injar  file="${dist.jar}" />
+	        <outjar file="${build.dir}/obfuscated/AsmCompiler_obf.jar" />
+	        
+	        <libraryjar path="${javac.classpath}" />            
+	        <libraryjar file="${java.home.path}/jre/lib/rt.jar" />
+	        
+	    </proguard>
+	</target>
     <!--
 
     There exist several targets which are by default empty and which can be 

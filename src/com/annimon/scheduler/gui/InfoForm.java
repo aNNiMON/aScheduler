@@ -23,6 +23,6 @@ public class InfoForm extends AbstractRepotsForm {
 
     @Override
     protected void selectionChanged(int selectionIndex) {
-        
+        // не реализовано.
     }
 }

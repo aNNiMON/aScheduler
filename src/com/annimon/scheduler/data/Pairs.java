@@ -14,13 +14,9 @@ public class Pairs extends Entity {
     private short day;
     private Short week;
     private Integer groupId;
-    //private Groups group;
     private Integer professorId;
-    //private Professors professor;
     private Integer subjectId;
-    //private Subjects subject;
     private Integer audienceId;
-    //private Audiences audience;
     
     public short getNumber() {
         return number;
@@ -75,14 +71,6 @@ public class Pairs extends Entity {
         this.groupId = groupId;
     }
     
-    /*public Groups getGroup() {
-        return group;
-    }
-
-    public void setGroup(Groups group) {
-        this.group = group;
-    }*/
-
     public Integer getProfessorId() {
         return professorId;
     }
@@ -90,14 +78,6 @@ public class Pairs extends Entity {
     public void setProfessorId(Integer professorId) {
         this.professorId = professorId;
     }
-    
-    /*public Professors getProfessor() {
-        return professor;
-    }
-
-    public void setProfessor(Professors professor) {
-        this.professor = professor;
-    }*/
     
     public Integer getSubjectId() {
         return subjectId;
@@ -107,14 +87,6 @@ public class Pairs extends Entity {
         this.subjectId = subjectId;
     }
     
-    /*public Subjects getSubject() {
-        return subject;
-    }
-
-    public void setSubject(Subjects subject) {
-        this.subject = subject;
-    }*/
-
     public Integer getAudienceId() {
         return audienceId;
     }
@@ -123,12 +95,6 @@ public class Pairs extends Entity {
         this.audienceId = audienceId;
     }
     
-    /*public Audiences getAudience() {
-    return audience;
-    }
-    public void setAudience(Audiences audience) {
-    this.audience = audience;
-    }*/
     @Override
     public String toString() {
         return "Pairs{" + "number=" + number + ", timeBegin=" + timeBegin + ", timeEnd=" + timeEnd + ", day=" + day + ", week=" + week + ", groupId=" + groupId + ", professorId=" + professorId + ", subjectId=" + subjectId + ", audienceId=" + audienceId + '}';

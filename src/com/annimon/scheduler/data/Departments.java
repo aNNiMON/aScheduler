@@ -8,7 +8,6 @@ public class Departments extends Entity {
     
     private String name;
     private Integer facultyId;
-    private Faculties faculty;
     
     public String getName() {
         return name;
@@ -26,12 +25,6 @@ public class Departments extends Entity {
         this.facultyId = facultyId;
     }
     
-    /*public Faculties getFaculty() {
-    return faculty;
-    }
-    public void setFaculty(Faculties faculty) {
-    this.faculty = faculty;
-    }*/
     @Override
     public String toString() {
         return "Departments{" + "name=" + name + ", facultyId=" + facultyId + '}';

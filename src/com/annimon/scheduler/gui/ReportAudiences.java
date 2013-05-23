@@ -3,7 +3,6 @@ package com.annimon.scheduler.gui;
 import com.annimon.scheduler.dao.DAOKeeper;
 import com.annimon.scheduler.data.Audiences;
 import com.annimon.scheduler.model.AudienceModel;
-import com.annimon.scheduler.model.PairModel;
 import com.annimon.scheduler.util.DBConnection;
 import com.annimon.scheduler.util.HtmlBuilder;
 
