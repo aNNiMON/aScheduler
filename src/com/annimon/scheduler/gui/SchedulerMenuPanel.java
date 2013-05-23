@@ -24,7 +24,7 @@ public class SchedulerMenuPanel extends JPanel {
         AUDIENCES, PROFESSORS, SUBJECTS, PAIRS,
         FACULTIES, DEPARTMENTS, SPECIALITIES, GROUPS,
         
-        REPORT_PROFESSORS,
+        REPORT_PROFESSORS, REPORT_AUDIENCES, REPORT_GROUPS,
         
         HELP, ABOUT, EXIT
     };
@@ -47,6 +47,8 @@ public class SchedulerMenuPanel extends JPanel {
         tableButtonsPanel.add(createButton("Группы", ButtonId.GROUPS));
         tableButtonsPanel.add(createLabel("Отчёты"));
         tableButtonsPanel.add(createButton("Преподаватели", ButtonId.REPORT_PROFESSORS));
+        tableButtonsPanel.add(createButton("Аудитории", ButtonId.REPORT_AUDIENCES));
+        tableButtonsPanel.add(createButton("Группы", ButtonId.REPORT_GROUPS));
         add(tableButtonsPanel, BorderLayout.CENTER);
 
         // Кнопки управления.
@@ -126,6 +128,12 @@ public class SchedulerMenuPanel extends JPanel {
                 
             case REPORT_PROFESSORS:
                 new ReportProfessors().setVisible(true);
+                break;
+            case REPORT_AUDIENCES:
+                new ReportAudiences().setVisible(true);
+                break;
+            case REPORT_GROUPS:
+                new ReportGroups().setVisible(true);
                 break;
                 
             case HELP:

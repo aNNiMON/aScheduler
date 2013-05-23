@@ -21,6 +21,10 @@ public abstract class EntityTableModel extends AbstractTableModel {
         this.dao = dao;
         entityList = dao.select();
     }
+    
+    public Object[] getRowObjects(int row) {
+        return fillRow(row);
+    }
 
     public Entity getEntity(int index) {
         return entityList.get(index);

@@ -8,4 +8,8 @@ $$$
 <ul>
 $+array+$ <li>|||</li>
 </ul>
+<br><b>Преподаёт:</b>
+<ul>
+$+array+$ <li>|||</li>
+</ul>
 </html>
