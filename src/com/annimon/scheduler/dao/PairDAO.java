@@ -43,11 +43,9 @@ public class PairDAO implements IDAO {
     public int insert(Entity entity) {
         Pairs pr = cast(entity);
         
-        String sql = "INSERT INTO pairs(id, number, time_begin, time_end, day, " + 
-                "week, audience, subject, professor, `group`) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "CALL add_pair(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
-            pr.getId(), pr.getNumber(), pr.getTimeBegin(), pr.getTimeEnd(), pr.getDay(),
+            pr.getNumber(), pr.getTimeBegin(), pr.getTimeEnd(), pr.getDay(),
             pr.getWeek(), pr.getAudienceId(), pr.getSubjectId(), pr.getProfessorId(),
             pr.getGroupId()
         });

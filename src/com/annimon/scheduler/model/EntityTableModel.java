@@ -13,7 +13,7 @@ import javax.swing.table.AbstractTableModel;
 public abstract class EntityTableModel extends AbstractTableModel {
 
     private final IDAO dao;
-    private final List<Entity> entityList;
+    private List<Entity> entityList;
     private String[] columnNames;
     private List<Object[]> itemList;
 
@@ -30,6 +30,9 @@ public abstract class EntityTableModel extends AbstractTableModel {
         if (entity == null) return;
         
         int id = dao.insert(entity);
+        if (id == -1 && isExitOnInsertionError(entity)) {
+            return;
+        }
         entity.setId(id);
         
         int row = entityList.size();
@@ -88,9 +91,25 @@ public abstract class EntityTableModel extends AbstractTableModel {
 
     protected abstract Object[] fillRow(int index);
     
+    /**
+     * Метод, который нужно переопределить в производных классах, для обработки
+     * события, когда при вставке получен ответ -1.
+     * @param entity объект Entity, с которым возникли проблемы.
+     * @return true - выйти из функции обновления, false - игнорировать.
+     */
+    protected boolean isExitOnInsertionError(Entity entity) {
+        return false;
+    }
+    
     protected void initTableModel() {
         columnNames = getColumnNames();
         fillList(entityList.size());
+    }
+    
+    protected void refreshDataFromDAO() {
+        entityList = dao.select();
+        fillList(entityList.size());
+        fireTableDataChanged();
     }
 
     private void fillList(int rowCount) {

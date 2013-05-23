@@ -41,6 +41,14 @@ public class PairModel extends EntityTableModel {
     protected String[] getColumnNames() {
         return COLUMN_NAMES;
     }
+    
+    @Override
+    protected boolean isExitOnInsertionError(Entity entity) {
+        // Если при добавлении вернулся код -1, обновляем модель и выходим из функции добавления.
+        //super.update(super.getRowCount() - 1, entity);
+        super.refreshDataFromDAO();
+        return true;
+    }
 
     @Override
     protected Object[] fillRow(int index) {
