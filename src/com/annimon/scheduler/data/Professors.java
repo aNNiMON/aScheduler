@@ -44,7 +44,7 @@ public class Professors extends Entity {
 
     @Override
     public String toString() {
-        return "Professors{" + lastname + ' ' + firstname + ' ' + middlename + '}';
+        return lastname + ' ' + firstname + ' ' + middlename;
     }
     
 }

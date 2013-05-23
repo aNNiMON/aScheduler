@@ -10,12 +10,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Подключение к базе данных.
@@ -82,6 +81,34 @@ public class DBConnection {
         statement = getStatement(connection, sql, params);
         List<Entity> resultList = executeQuery(statement, handler);
         return resultList;
+    }
+    
+    public Object[][] executeQuery(String sql, Object[] params) {
+        List<Object[]> resultList = new ArrayList<>();
+        
+        PreparedStatement stm = getStatement(connection, sql, params);
+        ResultSet rs = null;
+        try {
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                ResultSetMetaData meta = rs.getMetaData();
+                int cols = meta.getColumnCount();
+                Object[] item = new Object[cols];
+                for (int i = 0; i < cols; i++) {
+                    item[i] = rs.getObject(i + 1);
+                }
+                resultList.add(item);
+            }
+        } catch (SQLException ex) {
+            ExceptionHandler.handle(ex, "sql object[] query");
+        } finally {
+            close(stm);
+            close(rs);
+        }
+        Object[][] result = new Object[resultList.size()][];
+        result = resultList.toArray(result);
+        
+        return result;
     }
     
     public List<Entity> executeQuery(PreparedStatement pstmt, IResultSetHandler handler) {

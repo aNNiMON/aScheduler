@@ -20,7 +20,7 @@ public class PairModel extends EntityTableModel {
     
     public static final String[] DAY_NAMES = {
         "Понедельник", "Вторник", "Среда",
-        "Четверг", "Пятница", "Суббота"
+        "Четверг", "Пятница", "Суббота", "Воскресенье"
     };
     
     public static final String[] WEEK_NAMES = {

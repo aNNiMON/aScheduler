@@ -20,8 +20,12 @@ public class SchedulerMenuPanel extends JPanel {
 
     private enum ButtonId {
         REFRESH,
+        
         AUDIENCES, PROFESSORS, SUBJECTS, PAIRS,
         FACULTIES, DEPARTMENTS, SPECIALITIES, GROUPS,
+        
+        REPORT_PROFESSORS,
+        
         HELP, ABOUT, EXIT
     };
     
@@ -32,7 +36,7 @@ public class SchedulerMenuPanel extends JPanel {
         JPanel tableButtonsPanel = new JPanel();
         tableButtonsPanel.setLayout(new BoxLayout(tableButtonsPanel, BoxLayout.PAGE_AXIS));
         tableButtonsPanel.add(createButton("Обновить", ButtonId.REFRESH));
-        tableButtonsPanel.add(createGap());
+        tableButtonsPanel.add(createLabel("Таблицы"));
         tableButtonsPanel.add(createButton("Аудитории", ButtonId.AUDIENCES));
         tableButtonsPanel.add(createButton("Преподаватели", ButtonId.PROFESSORS));
         tableButtonsPanel.add(createButton("Предметы", ButtonId.SUBJECTS));
@@ -41,7 +45,8 @@ public class SchedulerMenuPanel extends JPanel {
         tableButtonsPanel.add(createButton("Кафедры", ButtonId.DEPARTMENTS));
         tableButtonsPanel.add(createButton("Специальности", ButtonId.SPECIALITIES));
         tableButtonsPanel.add(createButton("Группы", ButtonId.GROUPS));
-        
+        tableButtonsPanel.add(createLabel("Отчёты"));
+        tableButtonsPanel.add(createButton("Преподаватели", ButtonId.REPORT_PROFESSORS));
         add(tableButtonsPanel, BorderLayout.CENTER);
 
         // Кнопки управления.
@@ -117,6 +122,10 @@ public class SchedulerMenuPanel extends JPanel {
                 break;
             case GROUPS:
                 new GroupsForm().setVisible(true);
+                break;
+                
+            case REPORT_PROFESSORS:
+                new ReportProfessors().setVisible(true);
                 break;
                 
             case HELP:
