@@ -58,8 +58,11 @@ public class SchedulerPairPanel extends JPanel {
                 bottomWeek = panel;
             }
             subjectsPanel.removeAll();
-            subjectsPanel.add(upperWeek == null ? empty : upperWeek );
+            subjectsPanel.add(upperWeek == null ? empty : upperWeek);
             subjectsPanel.add(bottomWeek == null ? empty : bottomWeek);
+            // Добавление рамки для разделения верхней/нижней недели.
+            JPanel p = (upperWeek == null ? empty : upperWeek);
+            p.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY));
         }
     }
     

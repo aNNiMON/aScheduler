@@ -1,9 +1,7 @@
 package com.annimon.scheduler.gui;
 
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -34,8 +32,6 @@ public class SchedulerSubjectPanel extends JPanel {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 2;
         add(professorLabel, gridBagConstraints);
-        
-        setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY));
     }
     
 }
