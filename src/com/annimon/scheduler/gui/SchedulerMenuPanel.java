@@ -129,8 +129,8 @@ public class SchedulerMenuPanel extends JPanel {
                 break;
                 
             case HELP:
-                break;
             case ABOUT:
+                new InfoForm(id == ButtonId.HELP ? "help.html" : "about.html").setVisible(true);
                 break;
             case EXIT:
                 System.exit(0);

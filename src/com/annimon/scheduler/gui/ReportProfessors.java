@@ -3,12 +3,9 @@ package com.annimon.scheduler.gui;
 import com.annimon.scheduler.dao.DAOKeeper;
 import com.annimon.scheduler.data.Entity;
 import com.annimon.scheduler.data.Professors;
-import com.annimon.scheduler.data.Subjects;
 import com.annimon.scheduler.model.PairModel;
 import com.annimon.scheduler.util.DBConnection;
 import com.annimon.scheduler.util.HtmlBuilder;
-import com.annimon.scheduler.util.IResultSetHandler;
-import java.sql.ResultSet;
 import java.util.List;
 
 /**
