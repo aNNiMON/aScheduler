@@ -6,7 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 /**
  * Панель меню.
@@ -15,7 +17,7 @@ import javax.swing.JPanel;
 public class SchedulerMenuPanel extends JPanel {
     
     private static final Dimension MAX_BUTTON_DIMENSION = new Dimension(150, 30);
-    
+
     private enum ButtonId {
         REFRESH,
         AUDIENCES, PROFESSORS, SUBJECTS, PAIRS,
@@ -30,6 +32,7 @@ public class SchedulerMenuPanel extends JPanel {
         JPanel tableButtonsPanel = new JPanel();
         tableButtonsPanel.setLayout(new BoxLayout(tableButtonsPanel, BoxLayout.PAGE_AXIS));
         tableButtonsPanel.add(createButton("Обновить", ButtonId.REFRESH));
+        tableButtonsPanel.add(createGap());
         tableButtonsPanel.add(createButton("Аудитории", ButtonId.AUDIENCES));
         tableButtonsPanel.add(createButton("Преподаватели", ButtonId.PROFESSORS));
         tableButtonsPanel.add(createButton("Предметы", ButtonId.SUBJECTS));
@@ -38,6 +41,7 @@ public class SchedulerMenuPanel extends JPanel {
         tableButtonsPanel.add(createButton("Кафедры", ButtonId.DEPARTMENTS));
         tableButtonsPanel.add(createButton("Специальности", ButtonId.SPECIALITIES));
         tableButtonsPanel.add(createButton("Группы", ButtonId.GROUPS));
+        
         add(tableButtonsPanel, BorderLayout.CENTER);
 
         // Кнопки управления.
@@ -62,6 +66,27 @@ public class SchedulerMenuPanel extends JPanel {
             }
         });
         return button;
+    }
+    
+    /*
+     * Создание невидимой панели отступа.
+     */
+    private JPanel createGap() {
+        JPanel gap = new JPanel();
+        gap.setMaximumSize(MAX_BUTTON_DIMENSION);
+        return gap;
+    }
+    
+    /*
+     * Создание метки.
+     */
+    private JLabel createLabel(String text) {
+        JLabel label = new JLabel();
+        label.setMaximumSize(MAX_BUTTON_DIMENSION);
+        label.setText(text);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setVerticalAlignment(SwingConstants.BOTTOM);
+        return label;
     }
     
     private void onButtonClick(ButtonId id) {
