@@ -1,7 +1,7 @@
 package com.annimon.scheduler.exceptions;
 
 /**
- * 
+ * Ошибка пустого поля.
  * @author aNNiMON
  */
 public class EmptyFieldException extends InvalidInputDataException {

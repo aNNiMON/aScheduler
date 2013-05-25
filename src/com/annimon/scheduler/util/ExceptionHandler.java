@@ -12,10 +12,17 @@ public class ExceptionHandler {
     
     private static HANDLE_MODE mode = HANDLE_MODE.LOG_STACK_TRACE;
 
+    /**
+     * Установка режима, когда все сообщения игнорируются.
+     */
     public static void setNoLogMode() {
         ExceptionHandler.mode = HANDLE_MODE.NO_LOG;
     }
     
+    /**
+     * Установка режима вывода логов на консоль.
+     * Используется трассировка стека.
+     */
     public static void setStackTraceMode() {
         ExceptionHandler.mode = HANDLE_MODE.LOG_STACK_TRACE;
     }

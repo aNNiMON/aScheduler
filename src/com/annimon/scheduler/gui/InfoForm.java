@@ -8,6 +8,10 @@ import com.annimon.scheduler.util.HtmlBuilder;
  */
 public class InfoForm extends AbstractRepotsForm {
 
+    /**
+     * Создаёт форму вывода информации.
+     * @param htmlResource путь ко внутреннему HTML-ресурсу
+     */
     public InfoForm(String htmlResource) {
         // Удаляем ComboBox.
         getContentPane().remove(0);
@@ -18,6 +22,7 @@ public class InfoForm extends AbstractRepotsForm {
 
     @Override
     protected String[] setComboBoxValues() {
+        // Так как ComboBox удалён, возвращаем пустой массив.
         return new String[0];
     }
 

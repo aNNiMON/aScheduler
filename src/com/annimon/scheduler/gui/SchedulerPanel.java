@@ -69,6 +69,9 @@ public class SchedulerPanel extends JPanel {
         return instance;
     }
     
+    /**
+     * Принудительно обновить данные расписания.
+     */
     public void refreshScheduler() {
         faculties = getFacultiesArray();
         String[] facultyNames = getFacultyNames(faculties);

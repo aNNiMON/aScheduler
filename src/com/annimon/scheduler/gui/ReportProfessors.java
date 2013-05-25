@@ -19,6 +19,7 @@ public class ReportProfessors extends AbstractRepotsForm {
     protected void selectionChanged(int selectionIndex) {
         Professors prof = (Professors) model.getEntity(selectionIndex);
         
+        // Самый загруженный день преподавателя.
         String sql = "CALL prof_doomsday(?)";
         Object[][] result = DBConnection.getInstance().executeQuery(sql, new Object[] {
             prof.getId()
@@ -26,6 +27,7 @@ public class ReportProfessors extends AbstractRepotsForm {
         int index = (Integer) result[0][0];
         String doomsday = PairModel.DAY_NAMES[index - 1];
         
+        // Выходные дни преподавателя.
         sql = "CALL prof_weekends(?)";
         result = DBConnection.getInstance().executeQuery(sql, new Object[] {
             prof.getId()
@@ -36,6 +38,7 @@ public class ReportProfessors extends AbstractRepotsForm {
             weekends[i] = PairModel.DAY_NAMES[index - 1];
         }
         
+        // Какие предметы читает преподаватель.
         sql = "CALL prof_subjects(?)";
         result = DBConnection.getInstance().executeQuery(sql, new Object[] {
             prof.getId()

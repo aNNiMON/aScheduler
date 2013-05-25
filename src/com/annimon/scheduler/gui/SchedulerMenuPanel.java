@@ -75,7 +75,7 @@ public class SchedulerMenuPanel extends JPanel {
         return button;
     }
     
-    /*
+    /**
      * Создание невидимой панели отступа.
      */
     private JPanel createGap() {
@@ -84,8 +84,10 @@ public class SchedulerMenuPanel extends JPanel {
         return gap;
     }
     
-    /*
+    /**
      * Создание метки.
+     * @param text текст метки
+     * @return объект JLabel
      */
     private JLabel createLabel(String text) {
         JLabel label = new JLabel();
@@ -96,11 +98,17 @@ public class SchedulerMenuPanel extends JPanel {
         return label;
     }
     
+    /**
+     * Обработка нажатий кнопок.
+     * @param id идентификатор нажатой кнопки
+     */
     private void onButtonClick(ButtonId id) {
         switch (id) {
             case REFRESH:
                 SchedulerPanel.getInstance().refreshScheduler();
                 break;
+                
+            // Таблицы.
             case AUDIENCES:
                 new AudiencesForm().setVisible(true);
                 break;
@@ -125,7 +133,8 @@ public class SchedulerMenuPanel extends JPanel {
             case GROUPS:
                 new GroupsForm().setVisible(true);
                 break;
-                
+            
+            // Отчёты.
             case REPORT_PROFESSORS:
                 new ReportProfessors().setVisible(true);
                 break;
@@ -135,7 +144,8 @@ public class SchedulerMenuPanel extends JPanel {
             case REPORT_GROUPS:
                 new ReportGroups().setVisible(true);
                 break;
-                
+            
+            // Управление.
             case HELP:
             case ABOUT:
                 new InfoForm(id == ButtonId.HELP ? "help.html" : "about.html").setVisible(true);

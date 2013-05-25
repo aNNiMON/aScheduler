@@ -34,6 +34,10 @@ public abstract class EntityTableModel extends AbstractTableModel {
         if (entity == null) return;
         
         int id = dao.insert(entity);
+        // Если при вставке получен код -1, значит произошла ошибка или 
+        // ограничение. Вызываем метод isExitOnInsertionError для обработки
+        // таких случаев. Если он вернёт true, значит не нужно добавлять новые
+        // данные в таблицу (к примеру, произошло обновление конфликтующих записей).
         if (id == -1 && isExitOnInsertionError(entity)) {
             return;
         }
@@ -91,15 +95,24 @@ public abstract class EntityTableModel extends AbstractTableModel {
         return false;
     }
     
+    /**
+     * Заполнить названия столбцов таблицы.
+     * @return массив строк с названиями столбцов
+     */
     protected abstract String[] getColumnNames();
 
+    /**
+     * Заполнить строку данными.
+     * @param index индекс строки
+     * @return массив объектов, которыми заполнится строка таблицы
+     */
     protected abstract Object[] fillRow(int index);
     
     /**
      * Метод, который нужно переопределить в производных классах, для обработки
      * события, когда при вставке получен ответ -1.
-     * @param entity объект Entity, с которым возникли проблемы.
-     * @return true - выйти из функции обновления, false - игнорировать.
+     * @param entity объект Entity, с которым возникли проблемы
+     * @return true - выйти из функции обновления, false - игнорировать
      */
     protected boolean isExitOnInsertionError(Entity entity) {
         return false;
@@ -110,6 +123,9 @@ public abstract class EntityTableModel extends AbstractTableModel {
         fillList(entityList.size());
     }
     
+    /**
+     * Принудительно обновить данные таблицы из БД.
+     */
     protected void refreshDataFromDAO() {
         entityList = dao.select();
         fillList(entityList.size());

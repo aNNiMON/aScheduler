@@ -23,6 +23,7 @@ public class SchedulerForm extends JFrame {
         SchedulerMenuPanel schedulerMenuPanel = new SchedulerMenuPanel();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        // При закрытии окна следует освободить ресурс связи с БД.
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent evt) {

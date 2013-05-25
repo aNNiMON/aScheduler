@@ -111,15 +111,15 @@ public abstract class AbstractEntityForm extends JDialog {
     
     /**
      * Заполнить компоненты панели данных из таблицы.
-     * @param rowSelected с какой строки таблицы брать данные.
+     * @param rowSelected с какой строки таблицы брать данные
      */
     protected abstract void fillComponentsInEditorPanel(int rowSelected);
     
     /**
      * Получить новый объект Entity из информации панели данных.
-     * @param row для какой строки таблицы делаются изменения.
-     * @param id идентификатор Entity.
-     * @return объект Entity.
+     * @param row для какой строки таблицы делаются изменения
+     * @param id идентификатор Entity
+     * @return объект Entity
      */
     protected abstract Entity getEntity(int row, int id);
     

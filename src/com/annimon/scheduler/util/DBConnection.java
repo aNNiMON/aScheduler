@@ -41,7 +41,6 @@ public class DBConnection {
     
     private DBConnection() {
         dbProperties = new Properties();
-        readProperties();
         initDatabase();
     }
     
@@ -56,6 +55,7 @@ public class DBConnection {
         try {
             int resultNum = pstmt.executeUpdate();
             if (resultNum > 0) {
+                // Получаем id вставленного элемента.
                 PreparedStatement stm = getStatement(connection, "SELECT last_insert_id()", null);
                 ResultSet rs = null;
                 try {
@@ -174,6 +174,9 @@ public class DBConnection {
         }
     }
 
+    /**
+     * Освобождение ресурсов и закрытие связи с базой данных.
+     */
     public void destroy() {
         close(statement);
         if (connection != null) {
@@ -186,6 +189,7 @@ public class DBConnection {
     }
     
     private void initDatabase() {
+        readProperties();
         try {
             Class.forName(dbProperties.getProperty("JDBC_DRIVER", "com.mysql.jdbc.Driver"));
             

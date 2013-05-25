@@ -2,6 +2,7 @@ package com.annimon.scheduler.exceptions;
 
 /**
  * Ошибка неправильного ввода данных.
+ * Добавляет к производным сообщениям просьбу проверить правильность ввода.
  * @author aNNiMON
  */
 public class InvalidInputDataException extends Exception {

@@ -34,7 +34,7 @@ public class SchedulerDepartmentPanel extends JPanel {
     }
     
     /*
-     * Получить список дней с расписаниес для указанной группы и заполнить панель расписания.
+     * Получить список дней с расписанием для указанной группы и заполнить панель расписания.
      */
     private SchedulerGroupPanel createScheduleTableDay(Groups groups) {
         SchedulerGroupPanel groupPanel = new SchedulerGroupPanel();

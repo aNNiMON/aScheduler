@@ -9,5 +9,8 @@ import java.sql.ResultSet;
  */
 public interface IResultSetHandler {
 
+    /*
+     * Заполняет данные из ResultSet в объект Entity.
+     */
     public Entity process(ResultSet rs) throws Exception;
 }

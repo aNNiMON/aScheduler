@@ -18,6 +18,7 @@ public class ReportAudiences extends AbstractRepotsForm {
     protected void selectionChanged(int selectionIndex) {
         Audiences au = (Audiences) model.getEntity(selectionIndex);
         
+        // Какие предметы проводятся в аудитории.
         String sql = "CALL au_subjects(?)";
         Object[][] result = DBConnection.getInstance().executeQuery(sql, new Object[] {
             au.getId()

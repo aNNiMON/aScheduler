@@ -28,12 +28,13 @@ public abstract class AbstractRepotsForm extends JDialog {
     }
 
     private void initComponents() {
-        final JComboBox selectorComboBox = new JComboBox();
+        // Текст отчётов выводится в JEditorPane в HTML-представлении.
         infoPane = new JEditorPane();
         infoPane.setContentType("text/html");
         infoPane.setEditable(false);
         infoPane.setOpaque(false);
         infoPane.setBackground(new Color(0,0,0,0));
+        // Возможность открытия ссылок в браузере.
         infoPane.addHyperlinkListener(new HyperlinkListener() {
 
             @Override
@@ -45,6 +46,9 @@ public abstract class AbstractRepotsForm extends JDialog {
         });
         infoPane.setBorder(new EmptyBorder(5, 10, 2, 10));
 
+        // Выбор данных для показа отчёта. Данные формируются в производных
+        // классах в методе setComboBoxValues.
+        final JComboBox selectorComboBox = new JComboBox();
         selectorComboBox.setModel(new DefaultComboBoxModel(setComboBoxValues()));
         selectorComboBox.addActionListener(new ActionListener() {
             @Override
@@ -67,9 +71,19 @@ public abstract class AbstractRepotsForm extends JDialog {
         pack();
     }
 
+    /**
+     * Заполнить данные для отчёта.
+     * Полученный массив строк будет отображаться в ComboBox.
+     * @return массив строк
+     */
     protected abstract String[] setComboBoxValues();
+    
     protected abstract void selectionChanged(int selectionIndex);
     
+    /**
+     * Найти поддерживаемый браузер и открыть в нём URL.
+     * @param url ссылка на удалённый ресурс
+     */
     private void openBrowser(String url) {
         String osName = System.getProperty("os.name");
         try {

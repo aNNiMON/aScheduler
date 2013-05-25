@@ -1,7 +1,7 @@
 package com.annimon.scheduler.exceptions;
 
 /**
- * Ошибка выхода за пределы типа.
+ * Ошибка выхода за пределы допустимых значений.
  * @author aNNiMON
  */
 public class ValueOutOfRangeException extends InvalidInputDataException {
