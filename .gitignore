@@ -1,3 +1,5 @@
 nbproject/private/
 build/
 dist/
+proguard/out.map
+proguard/out.txt

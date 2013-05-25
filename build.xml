@@ -12,24 +12,24 @@
     <import file="nbproject/build-impl.xml"/>
     
     <target name="-post-jar">
-	    <property name="proguard.jar.path" value="E:/SETUPS/Disk/Programming/Java/proguard4.9beta1/lib/proguard.jar" />
-	    <property name="java.home.path" value="D:/Program Files (x86)/Java/jdk1.7.0_09" />
+	    <property name="proguard.jar.path" value="proguard/proguard.jar" />
 	    
 	    <echo message="Obfuscating ${dist.jar}..." />
-	    <mkdir dir="${build.dir}/obfuscated" />
 	    
 	    <taskdef resource="proguard/ant/task.properties"
 	             classpath="${proguard.jar.path}" />
 	    
-	    <proguard configuration="E:/SETUPS/Disk/Programming/Java/java.pro">
+	    <proguard configuration="proguard/java.pro">
 	    
 	        <injar  file="${dist.jar}" />
-	        <outjar file="${build.dir}/obfuscated/AsmCompiler_obf.jar" />
+	        <outjar file="${build.dir}/obfuscated.jar" />
 	        
-	        <libraryjar path="${javac.classpath}" />            
-	        <libraryjar file="${java.home.path}/jre/lib/rt.jar" />
+	        <libraryjar path="${javac.classpath}" />
+	        <libraryjar file="${java.home}/lib/rt.jar" />
 	        
 	    </proguard>
+	    
+	    <move file="${build.dir}/obfuscated.jar" tofile="${dist.jar}"/>
 	</target>
     <!--
 
