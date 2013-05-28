@@ -199,6 +199,7 @@ public class DBConnection {
                     dbProperties.getProperty("DB_PASSWORD", ""));
         } catch (ClassNotFoundException | SQLException ex) {
             ExceptionHandler.handle(ex, "init database");
+            GUIUtils.showErrorMessage(ex);
         }
     }
     
