@@ -22,6 +22,10 @@ public class SpecialitiesForm extends AbstractEntityForm {
     public SpecialitiesForm() {
         super(new SpecialityModel(DAOKeeper.getSpecialityDAO()));
     }
+    
+    public SpecialitiesForm(String title) {
+        super(new SpecialityModel(DAOKeeper.getSpecialityDAO()), title);
+    }
 
     @Override
     protected void fillDataEditorPanel(JPanel dataEditorPanel) {

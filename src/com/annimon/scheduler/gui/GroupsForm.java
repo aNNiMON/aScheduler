@@ -37,6 +37,10 @@ public class GroupsForm extends AbstractEntityForm {
     public GroupsForm() {
         super(new GroupModel(DAOKeeper.getGroupDAO()));
     }
+    
+    public GroupsForm(String title) {
+        super(new GroupModel(DAOKeeper.getGroupDAO()), title);
+    }
 
     @Override
     protected void fillDataEditorPanel(JPanel dataEditorPanel) {

@@ -25,6 +25,10 @@ public class AudiencesForm extends AbstractEntityForm {
     public AudiencesForm() {
         super(new AudienceModel(DAOKeeper.getAudienceDAO()));
     }
+    
+    public AudiencesForm(String title) {
+        super(new AudienceModel(DAOKeeper.getAudienceDAO()), title);
+    }
 
     @Override
     protected void fillDataEditorPanel(JPanel dataEditorPanel) {

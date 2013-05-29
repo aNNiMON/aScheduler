@@ -14,6 +14,10 @@ import com.annimon.scheduler.util.HtmlBuilder;
 public class ReportProfessors extends AbstractRepotsForm {
     
     private ProfessorModel model;
+    
+    public ReportProfessors(String title) {
+        super(title);
+    }
 
     @Override
     protected void selectionChanged(int selectionIndex) {

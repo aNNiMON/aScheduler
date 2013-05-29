@@ -12,6 +12,10 @@ import com.annimon.scheduler.util.HtmlBuilder;
 public class ReportGroups extends AbstractRepotsForm {
     
     private GroupModel model;
+    
+    public ReportGroups(String title) {
+        super(title);
+    }
 
     @Override
     protected void selectionChanged(int selectionIndex) {

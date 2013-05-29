@@ -22,6 +22,10 @@ public class FacultiesForm extends AbstractEntityForm {
     public FacultiesForm() {
         super(new FacultyModel(DAOKeeper.getFacultyDAO()));
     }
+    
+    public FacultiesForm(String title) {
+        super(new FacultyModel(DAOKeeper.getFacultyDAO()), title);
+    }
 
     @Override
     protected void fillDataEditorPanel(JPanel dataEditorPanel) {

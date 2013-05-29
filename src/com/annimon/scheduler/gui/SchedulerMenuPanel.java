@@ -61,7 +61,7 @@ public class SchedulerMenuPanel extends JPanel {
         add(controlButtonsPanel, BorderLayout.SOUTH);
     }
     
-    private JButton createButton(String text, final ButtonId id) {
+    private JButton createButton(final String text, final ButtonId id) {
         JButton button = new JButton();
         button.setText(text);
         button.setMaximumSize(MAX_BUTTON_DIMENSION);
@@ -69,7 +69,7 @@ public class SchedulerMenuPanel extends JPanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                onButtonClick(id);
+                onButtonClick(id, text);
             }
         });
         return button;
@@ -101,8 +101,9 @@ public class SchedulerMenuPanel extends JPanel {
     /**
      * Обработка нажатий кнопок.
      * @param id идентификатор нажатой кнопки
+     * @param text текст нажатой кнопки (передаётся как заголовок форм)
      */
-    private void onButtonClick(ButtonId id) {
+    private void onButtonClick(ButtonId id, String text) {
         switch (id) {
             case REFRESH:
                 SchedulerPanel.getInstance().refreshScheduler();
@@ -110,45 +111,45 @@ public class SchedulerMenuPanel extends JPanel {
                 
             // Таблицы.
             case AUDIENCES:
-                new AudiencesForm().setVisible(true);
+                new AudiencesForm(text).setVisible(true);
                 break;
             case PROFESSORS:
-                new ProfessorsForm().setVisible(true);
+                new ProfessorsForm(text).setVisible(true);
                 break;
             case SUBJECTS:
-                new SubjectsForm().setVisible(true);
+                new SubjectsForm(text).setVisible(true);
                 break;
             case PAIRS:
-                new PairsForm().setVisible(true);
+                new PairsForm(text).setVisible(true);
                 break;
             case FACULTIES:
-                new FacultiesForm().setVisible(true);
+                new FacultiesForm(text).setVisible(true);
                 break;
             case DEPARTMENTS:
-                new DepartmentsForm().setVisible(true);
+                new DepartmentsForm(text).setVisible(true);
                 break;
             case SPECIALITIES:
-                new SpecialitiesForm().setVisible(true);
+                new SpecialitiesForm(text).setVisible(true);
                 break;
             case GROUPS:
-                new GroupsForm().setVisible(true);
+                new GroupsForm(text).setVisible(true);
                 break;
             
             // Отчёты.
             case REPORT_PROFESSORS:
-                new ReportProfessors().setVisible(true);
+                new ReportProfessors(text).setVisible(true);
                 break;
             case REPORT_AUDIENCES:
-                new ReportAudiences().setVisible(true);
+                new ReportAudiences(text).setVisible(true);
                 break;
             case REPORT_GROUPS:
-                new ReportGroups().setVisible(true);
+                new ReportGroups(text).setVisible(true);
                 break;
             
             // Управление.
             case HELP:
             case ABOUT:
-                new InfoForm(id == ButtonId.HELP ? "help.html" : "about.html").setVisible(true);
+                new InfoForm(id == ButtonId.HELP ? "help.html" : "about.html", text).setVisible(true);
                 break;
             case EXIT:
                 System.exit(0);

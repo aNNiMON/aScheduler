@@ -19,6 +19,16 @@ public class InfoForm extends AbstractRepotsForm {
         super.setInfoText(html.toString());
         pack();
     }
+    
+    /**
+     * Создаёт форму вывода информации.
+     * @param htmlResource путь ко внутреннему HTML-ресурсу
+     * @param title заголовок окна
+     */
+    public InfoForm(String htmlResource, String title) {
+        this(htmlResource);
+        setTitle(title);
+    }
 
     @Override
     protected String[] setComboBoxValues() {

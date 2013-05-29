@@ -29,6 +29,10 @@ public class DepartmentsForm extends AbstractEntityForm {
     public DepartmentsForm() {
         super(new DepartmentModel(DAOKeeper.getDepartmentDAO()));
     }
+    
+    public DepartmentsForm(String title) {
+        super(new DepartmentModel(DAOKeeper.getDepartmentDAO()), title);
+    }
 
     @Override
     protected void fillDataEditorPanel(JPanel dataEditorPanel) {

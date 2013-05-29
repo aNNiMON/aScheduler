@@ -37,6 +37,11 @@ public abstract class AbstractEntityForm extends JDialog {
         initComponents();
     }
     
+    public AbstractEntityForm(EntityTableModel model, String title) {
+        this(model);
+        setTitle(title);
+    }
+    
     private void initComponents() {
         table = new JTable();
         dataEditorPanel = new JPanel();

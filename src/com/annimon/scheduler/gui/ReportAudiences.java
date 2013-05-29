@@ -14,6 +14,10 @@ public class ReportAudiences extends AbstractRepotsForm {
     
     private AudienceModel model;
 
+    public ReportAudiences(String title) {
+        super(title);
+    }
+    
     @Override
     protected void selectionChanged(int selectionIndex) {
         Audiences au = (Audiences) model.getEntity(selectionIndex);

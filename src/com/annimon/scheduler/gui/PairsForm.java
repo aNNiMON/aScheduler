@@ -43,6 +43,10 @@ public class PairsForm extends AbstractEntityForm {
     public PairsForm() {
         super(new PairModel(DAOKeeper.getPairDAO()));
     }
+    
+    public PairsForm(String title) {
+        super(new PairModel(DAOKeeper.getPairDAO()), title);
+    }
 
     @Override
     protected void fillDataEditorPanel(JPanel dataEditorPanel) {

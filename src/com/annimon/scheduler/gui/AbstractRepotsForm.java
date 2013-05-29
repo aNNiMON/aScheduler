@@ -26,6 +26,11 @@ public abstract class AbstractRepotsForm extends JDialog {
         setModal(true);
         initComponents();
     }
+    
+    public AbstractRepotsForm(String title) {
+        this();
+        setTitle("Отчёты: " + title);
+    }
 
     private void initComponents() {
         // Текст отчётов выводится в JEditorPane в HTML-представлении.

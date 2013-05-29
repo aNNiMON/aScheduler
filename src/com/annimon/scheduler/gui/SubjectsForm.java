@@ -22,6 +22,10 @@ public class SubjectsForm extends AbstractEntityForm {
     public SubjectsForm() {
         super(new SubjectModel(DAOKeeper.getSubjectDAO()));
     }
+    
+    public SubjectsForm(String title) {
+        super(new SubjectModel(DAOKeeper.getSubjectDAO()), title);
+    }
 
     @Override
     protected void fillDataEditorPanel(JPanel dataEditorPanel) {
