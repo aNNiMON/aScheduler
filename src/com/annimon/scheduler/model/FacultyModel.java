@@ -7,13 +7,13 @@ import com.annimon.scheduler.data.Faculties;
  * Модель таблицы факультетов.
  * @author aNNiMON
  */
-public class FacultyModel extends EntityTableModel {
+public class FacultyModel extends EntityTableModel<Faculties> {
 
     private static final String[] COLUMN_NAMES = {
         "ID", "Название", "Сокращение"
     };
     
-    public FacultyModel(IDAO dao) {
+    public FacultyModel(IDAO<Faculties> dao) {
         super(dao);
         initTableModel();
     }
@@ -25,7 +25,7 @@ public class FacultyModel extends EntityTableModel {
 
     @Override
     protected Object[] fillRow(int index) {
-        Faculties fc = (Faculties) getEntity(index);
+        Faculties fc = getEntity(index);
         return new Object[] {
             fc.getId(),
             fc.getName(),

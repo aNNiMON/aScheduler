@@ -16,7 +16,7 @@ import java.util.List;
  * Модель таблицы пар.
  * @author aNNiMON
  */
-public class PairModel extends EntityTableModel {
+public class PairModel extends EntityTableModel<Pairs> {
     
     public static final String[] DAY_NAMES = {
         "Понедельник", "Вторник", "Среда",
@@ -32,7 +32,7 @@ public class PairModel extends EntityTableModel {
         "Аудитория", "Предмет", "Преподаватель", "Группа"
     };
     
-    public PairModel(IDAO dao) {
+    public PairModel(IDAO<Pairs> dao) {
         super(dao);
         initTableModel();
     }
@@ -43,7 +43,7 @@ public class PairModel extends EntityTableModel {
     }
     
     @Override
-    protected boolean isExitOnInsertionError(Entity entity) {
+    protected boolean isExitOnInsertionError(Pairs entity) {
         // Если при добавлении вернулся код -1, обновляем модель и выходим из функции добавления.
         super.refreshDataFromDAO();
         return true;
@@ -51,7 +51,7 @@ public class PairModel extends EntityTableModel {
 
     @Override
     protected Object[] fillRow(int index) {
-        Pairs pr = (Pairs) getEntity(index);
+        Pairs pr = getEntity(index);
         
         int weekIndex;
         if (pr.getWeek() == null) weekIndex = 0;

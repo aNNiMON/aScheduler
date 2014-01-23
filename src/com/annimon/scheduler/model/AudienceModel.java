@@ -7,7 +7,7 @@ import com.annimon.scheduler.data.Audiences;
  * Модель таблицы аудиторий.
  * @author aNNiMON
  */
-public class AudienceModel extends EntityTableModel {
+public class AudienceModel extends EntityTableModel<Audiences> {
 
     public static final String[] AUDIENCE_TYPE = {
         "Практическая", "Лекционная"
@@ -17,7 +17,7 @@ public class AudienceModel extends EntityTableModel {
         "ID", "Номер", "Тип", "Корпус", "Вместимость"
     };
     
-    public AudienceModel(IDAO dao) {
+    public AudienceModel(IDAO<Audiences> dao) {
         super(dao);
         initTableModel();
     }
@@ -29,7 +29,7 @@ public class AudienceModel extends EntityTableModel {
 
     @Override
     protected Object[] fillRow(int index) {
-        Audiences au = (Audiences) getEntity(index);
+        Audiences au = getEntity(index);
         return new Object[] {
             au.getId(),
             au.getNumber(),

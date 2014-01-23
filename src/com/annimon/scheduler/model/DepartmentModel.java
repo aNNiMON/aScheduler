@@ -12,13 +12,13 @@ import java.util.List;
  * Модель таблицы кафедр.
  * @author aNNiMON
  */
-public class DepartmentModel extends EntityTableModel {
+public class DepartmentModel extends EntityTableModel<Departments> {
 
     private static final String[] COLUMN_NAMES = {
         "ID", "Название", "Факультет"
     };
     
-    public DepartmentModel(IDAO dao) {
+    public DepartmentModel(IDAO<Departments> dao) {
         super(dao);
         initTableModel();
     }
@@ -30,7 +30,7 @@ public class DepartmentModel extends EntityTableModel {
 
     @Override
     protected Object[] fillRow(int index) {
-        Departments dp = (Departments) getEntity(index);
+        Departments dp = getEntity(index);
         
         String faculty;
         String sql = "SELECT * FROM faculties WHERE id = ?";

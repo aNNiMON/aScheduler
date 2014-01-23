@@ -14,14 +14,14 @@ import java.util.List;
  * Модель таблицы групп.
  * @author aNNiMON
  */
-public class GroupModel extends EntityTableModel {
+public class GroupModel extends EntityTableModel<Groups> {
     
     private static final String[] COLUMN_NAMES = {
         "ID", "Название", "Год создания", "Численность",
         "Специальность", "Кафедра", "Форма обучения"
     };
     
-    public GroupModel(IDAO dao) {
+    public GroupModel(IDAO<Groups> dao) {
         super(dao);
         initTableModel();
     }
@@ -33,7 +33,7 @@ public class GroupModel extends EntityTableModel {
 
     @Override
     protected Object[] fillRow(int index) {
-        Groups gr = (Groups) getEntity(index);
+        Groups gr = getEntity(index);
         
         String speciality;
         String sql = "SELECT * FROM specialities WHERE id = ?";

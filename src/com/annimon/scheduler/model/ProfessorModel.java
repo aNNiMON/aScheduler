@@ -7,13 +7,13 @@ import com.annimon.scheduler.data.Professors;
  * Модель таблицы преподавателей.
  * @author aNNiMON
  */
-public class ProfessorModel extends EntityTableModel {
+public class ProfessorModel extends EntityTableModel<Professors> {
 
     private static final String[] COLUMN_NAMES = {
         "ID", "Фамилия", "Имя", "Отчество"
     };
     
-    public ProfessorModel(IDAO dao) {
+    public ProfessorModel(IDAO<Professors> dao) {
         super(dao);
         initTableModel();
     }
@@ -25,7 +25,7 @@ public class ProfessorModel extends EntityTableModel {
 
     @Override
     protected Object[] fillRow(int index) {
-        Professors pr = (Professors) getEntity(index);
+        Professors pr = getEntity(index);
         return new Object[] {
             pr.getId(),
             pr.getLastname(),

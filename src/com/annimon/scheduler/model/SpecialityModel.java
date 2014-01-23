@@ -7,13 +7,13 @@ import com.annimon.scheduler.data.Specialities;
  * Модель таблицы специальностей.
  * @author aNNiMON
  */
-public class SpecialityModel extends EntityTableModel {
+public class SpecialityModel extends EntityTableModel<Specialities> {
 
     private static final String[] COLUMN_NAMES = {
         "ID", "Код", "Название"
     };
     
-    public SpecialityModel(IDAO dao) {
+    public SpecialityModel(IDAO<Specialities> dao) {
         super(dao);
         initTableModel();
     }
@@ -25,7 +25,7 @@ public class SpecialityModel extends EntityTableModel {
 
     @Override
     protected Object[] fillRow(int index) {
-        Specialities sp = (Specialities) getEntity(index);
+        Specialities sp = getEntity(index);
         return new Object[] {
             sp.getId(),
             sp.getCode(),

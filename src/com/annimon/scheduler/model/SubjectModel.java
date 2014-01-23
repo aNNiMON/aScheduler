@@ -7,13 +7,13 @@ import com.annimon.scheduler.data.Subjects;
  * Модель таблицы предметов.
  * @author aNNiMON
  */
-public class SubjectModel extends EntityTableModel {
+public class SubjectModel extends EntityTableModel<Subjects> {
 
     private static final String[] COLUMN_NAMES = {
         "ID", "Название", "Сокращение"
     };
     
-    public SubjectModel(IDAO dao) {
+    public SubjectModel(IDAO<Subjects> dao) {
         super(dao);
         initTableModel();
     }
@@ -25,7 +25,7 @@ public class SubjectModel extends EntityTableModel {
 
     @Override
     protected Object[] fillRow(int index) {
-        Subjects sb = (Subjects) getEntity(index);
+        Subjects sb = getEntity(index);
         return new Object[] {
             sb.getId(),
             sb.getName(),

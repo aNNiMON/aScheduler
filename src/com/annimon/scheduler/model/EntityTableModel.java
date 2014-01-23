@@ -9,15 +9,16 @@ import javax.swing.table.AbstractTableModel;
 /**
  * Модель таблиц.
  * @author aNNiMON
+ * @param <T>
  */
-public abstract class EntityTableModel extends AbstractTableModel {
+public abstract class EntityTableModel<T extends Entity> extends AbstractTableModel {
 
-    private final IDAO dao;
+    private final IDAO<T> dao;
     private List<Entity> entityList;
     private String[] columnNames;
     private List<Object[]> itemList;
 
-    public EntityTableModel(IDAO dao) {
+    public EntityTableModel(IDAO<T> dao) {
         this.dao = dao;
         entityList = dao.select();
     }
@@ -26,11 +27,11 @@ public abstract class EntityTableModel extends AbstractTableModel {
         return fillRow(row);
     }
 
-    public Entity getEntity(int index) {
-        return entityList.get(index);
+    public T getEntity(int index) {
+        return (T) entityList.get(index);
     }
     
-    public void insert(Entity entity) {
+    public void insert(T entity) {
         if (entity == null) return;
         
         int id = dao.insert(entity);
@@ -49,7 +50,7 @@ public abstract class EntityTableModel extends AbstractTableModel {
         fireTableRowsInserted(0, row);
     }
     
-    public void delete(int row, Entity entity) {
+    public void delete(int row, T entity) {
         if (entity == null) return;
         
         dao.delete(entity);
@@ -59,7 +60,7 @@ public abstract class EntityTableModel extends AbstractTableModel {
         fireTableRowsDeleted(0, row);
     }
     
-    public void update(int row, Entity entity) {
+    public void update(int row, T entity) {
         if (entity == null) return;
         
         dao.update(entity);
@@ -114,7 +115,7 @@ public abstract class EntityTableModel extends AbstractTableModel {
      * @param entity объект Entity, с которым возникли проблемы
      * @return true - выйти из функции обновления, false - игнорировать
      */
-    protected boolean isExitOnInsertionError(Entity entity) {
+    protected boolean isExitOnInsertionError(T entity) {
         return false;
     }
     
