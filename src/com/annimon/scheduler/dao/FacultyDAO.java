@@ -11,12 +11,12 @@ import java.util.List;
  *
  * @author aNNiMON
  */
-public class FacultyDAO implements IDAO {
+public class FacultyDAO implements IDAO<Faculties> {
     
-    private final IResultSetHandler handler = new IResultSetHandler() {
+    private final IResultSetHandler<Faculties> handler = new IResultSetHandler<Faculties>() {
 
         @Override
-        public Entity process(ResultSet rs) throws Exception {
+        public Faculties process(ResultSet rs) throws Exception {
             Faculties fc = new Faculties();
             fc.setId(rs.getInt(1));
             fc.setName(rs.getString(2));
@@ -33,9 +33,7 @@ public class FacultyDAO implements IDAO {
     }
 
     @Override
-    public int insert(Entity entity) {
-        Faculties fc = cast(entity);
-        
+    public int insert(Faculties fc) {
         String sql = "INSERT INTO faculties(id, name, abbreviation) " +
                 "VALUES (?, ?, ?)";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
@@ -45,11 +43,8 @@ public class FacultyDAO implements IDAO {
     }
     
     @Override
-    public int update(Entity entity) {
-        Faculties fc = cast(entity);
-        
-        String sql = "UPDATE faculties SET name = ?, abbreviation = ? " +
-                " WHERE id = ?";
+    public int update(Faculties fc) {
+        String sql = "UPDATE faculties SET name = ?, abbreviation = ? WHERE id = ?";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
             fc.getName(), fc.getAbbreviation(), fc.getId()
         });
@@ -57,23 +52,16 @@ public class FacultyDAO implements IDAO {
     }
 
     @Override
-    public int delete(Entity entity) {
+    public int delete(Faculties fc) {
         String sql = "DELETE FROM faculties WHERE id = ?";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
-            entity.getId()
+            fc.getId()
         });
         return rowNum;
     }
     
     @Override
-    public IResultSetHandler getResultSetHandler() {
+    public IResultSetHandler<Faculties> getResultSetHandler() {
         return handler;
-    }
-
-    private Faculties cast(Entity entity) {
-        if (entity instanceof Faculties) {
-            return (Faculties) entity;
-        }
-        throw new ClassCastException();
     }
 }

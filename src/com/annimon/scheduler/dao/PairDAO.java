@@ -11,12 +11,12 @@ import java.util.List;
  *
  * @author aNNiMON
  */
-public class PairDAO implements IDAO {
+public class PairDAO implements IDAO<Pairs> {
     
-    private final IResultSetHandler handler = new IResultSetHandler() {
+    private final IResultSetHandler<Pairs> handler = new IResultSetHandler<Pairs>() {
 
         @Override
-        public Entity process(ResultSet rs) throws Exception {
+        public Pairs process(ResultSet rs) throws Exception {
             Pairs pr = new Pairs();
             pr.setId(rs.getInt(1));
             pr.setNumber(rs.getShort(2));
@@ -40,9 +40,7 @@ public class PairDAO implements IDAO {
     }
 
     @Override
-    public int insert(Entity entity) {
-        Pairs pr = cast(entity);
-        
+    public int insert(Pairs pr) {
         String sql = "CALL add_pair(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
             pr.getNumber(), pr.getTimeBegin(), pr.getTimeEnd(), pr.getDay(),
@@ -53,9 +51,7 @@ public class PairDAO implements IDAO {
     }
     
     @Override
-    public int update(Entity entity) {
-        Pairs pr = cast(entity);
-        
+    public int update(Pairs pr) {
         String sql = "UPDATE pairs SET number = ?, time_begin = ?, time_end = ?, " +
                 "day = ?, week = ?, audience = ?, subject = ?, " +
                 "professor = ?, `group` = ? WHERE id = ?";
@@ -68,23 +64,16 @@ public class PairDAO implements IDAO {
     }
 
     @Override
-    public int delete(Entity entity) {
+    public int delete(Pairs pr) {
         String sql = "DELETE FROM pairs WHERE id = ?";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
-            entity.getId()
+            pr.getId()
         });
         return rowNum;
     }
     
     @Override
-    public IResultSetHandler getResultSetHandler() {
+    public IResultSetHandler<Pairs> getResultSetHandler() {
         return handler;
     }
-
-    private Pairs cast(Entity entity) {
-        if (entity instanceof Pairs) {
-            return (Pairs) entity;
-        }
-        throw new ClassCastException();
-    } 
 }

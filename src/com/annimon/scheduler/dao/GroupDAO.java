@@ -11,12 +11,12 @@ import java.util.List;
  *
  * @author aNNiMON
  */
-public class GroupDAO implements IDAO {
+public class GroupDAO implements IDAO<Groups> {
     
-    private final IResultSetHandler handler = new IResultSetHandler() {
+    private final IResultSetHandler<Groups> handler = new IResultSetHandler<Groups>() {
 
         @Override
-        public Entity process(ResultSet rs) throws Exception {
+        public Groups process(ResultSet rs) throws Exception {
             Groups gr = new Groups();
             gr.setId(rs.getInt(1));
             gr.setSpecialityId(rs.getInt(2));
@@ -37,9 +37,7 @@ public class GroupDAO implements IDAO {
     }
 
     @Override
-    public int insert(Entity entity) {
-        Groups gr = cast(entity);
-        
+    public int insert(Groups gr) {
         String sql = "INSERT INTO groups(id, speciality, name, formation_year, " + 
                 "strength, department, education_form) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -51,9 +49,7 @@ public class GroupDAO implements IDAO {
     }
     
     @Override
-    public int update(Entity entity) {
-        Groups gr = cast(entity);
-        
+    public int update(Groups gr) {
         String sql = "UPDATE groups SET speciality = ?, name = ?, " +
                 "formation_year = ?, strength = ?, department = ?, " +
                 "education_form = ? WHERE id = ?";
@@ -66,23 +62,16 @@ public class GroupDAO implements IDAO {
     }
 
     @Override
-    public int delete(Entity entity) {
+    public int delete(Groups gr) {
         String sql = "DELETE FROM groups WHERE id = ?";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
-            entity.getId()
+            gr.getId()
         });
         return rowNum;
     }
     
     @Override
-    public IResultSetHandler getResultSetHandler() {
+    public IResultSetHandler<Groups> getResultSetHandler() {
         return handler;
     }
-
-    private Groups cast(Entity entity) {
-        if (entity instanceof Groups) {
-            return (Groups) entity;
-        }
-        throw new ClassCastException();
-    } 
 }

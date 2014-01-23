@@ -11,12 +11,12 @@ import java.util.List;
  *
  * @author aNNiMON
  */
-public class SpecialityDAO implements IDAO {
+public class SpecialityDAO implements IDAO<Specialities> {
     
-    private final IResultSetHandler handler = new IResultSetHandler() {
+    private final IResultSetHandler<Specialities> handler = new IResultSetHandler<Specialities>() {
 
         @Override
-        public Entity process(ResultSet rs) throws Exception {
+        public Specialities process(ResultSet rs) throws Exception {
             Specialities sp = new Specialities();
             sp.setId(rs.getInt(1));
             sp.setCode(rs.getString(2));
@@ -33,9 +33,7 @@ public class SpecialityDAO implements IDAO {
     }
 
     @Override
-    public int insert(Entity entity) {
-        Specialities sp = cast(entity);
-        
+    public int insert(Specialities sp) {
         String sql = "INSERT INTO specialities(id, code, name) " +
                 "VALUES (?, ?, ?)";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
@@ -45,9 +43,7 @@ public class SpecialityDAO implements IDAO {
     }
     
     @Override
-    public int update(Entity entity) {
-        Specialities sp = cast(entity);
-        
+    public int update(Specialities sp) {
         String sql = "UPDATE specialities SET code = ?, name = ? " +
                 " WHERE id = ?";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
@@ -57,23 +53,16 @@ public class SpecialityDAO implements IDAO {
     }
 
     @Override
-    public int delete(Entity entity) {
+    public int delete(Specialities sp) {
         String sql = "DELETE FROM specialities WHERE id = ?";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
-            entity.getId()
+            sp.getId()
         });
         return rowNum;
     }
 
     @Override
-    public IResultSetHandler getResultSetHandler() {
+    public IResultSetHandler<Specialities> getResultSetHandler() {
         return handler;
     }
-    
-    private Specialities cast(Entity entity) {
-        if (entity instanceof Specialities) {
-            return (Specialities) entity;
-        }
-        throw new ClassCastException();
-    } 
 }

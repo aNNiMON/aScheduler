@@ -6,11 +6,12 @@ import java.sql.ResultSet;
 /**
  * Интерфейс обработки данных из ResultSet.
  * @author aNNiMON
+ * @param <T>
  */
-public interface IResultSetHandler {
+public interface IResultSetHandler<T extends Entity> {
 
     /*
      * Заполняет данные из ResultSet в объект Entity.
      */
-    public Entity process(ResultSet rs) throws Exception;
+    public T process(ResultSet rs) throws Exception;
 }

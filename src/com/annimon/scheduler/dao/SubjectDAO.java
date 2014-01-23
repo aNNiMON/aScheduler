@@ -11,12 +11,12 @@ import java.util.List;
  *
  * @author aNNiMON
  */
-public class SubjectDAO implements IDAO {
+public class SubjectDAO implements IDAO<Subjects> {
     
-    private final IResultSetHandler handler = new IResultSetHandler() {
+    private final IResultSetHandler<Subjects> handler = new IResultSetHandler<Subjects>() {
 
         @Override
-        public Entity process(ResultSet rs) throws Exception {
+        public Subjects process(ResultSet rs) throws Exception {
             Subjects sb = new Subjects();
             sb.setId(rs.getInt(1));
             sb.setName(rs.getString(2));
@@ -33,9 +33,7 @@ public class SubjectDAO implements IDAO {
     }
 
     @Override
-    public int insert(Entity entity) {
-        Subjects sb = cast(entity);
-        
+    public int insert(Subjects sb) {
         String sql = "INSERT INTO subjects(id, name, abbreviation) " +
                 "VALUES (?, ?, ?)";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
@@ -45,9 +43,7 @@ public class SubjectDAO implements IDAO {
     }
     
     @Override
-    public int update(Entity entity) {
-        Subjects sb = cast(entity);
-        
+    public int update(Subjects sb) {
         String sql = "UPDATE subjects SET name = ?, abbreviation = ? " +
                 " WHERE id = ?";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
@@ -57,23 +53,16 @@ public class SubjectDAO implements IDAO {
     }
 
     @Override
-    public int delete(Entity entity) {
+    public int delete(Subjects sb) {
         String sql = "DELETE FROM subjects WHERE id = ?";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
-            entity.getId()
+            sb.getId()
         });
         return rowNum;
     }
     
     @Override
-    public IResultSetHandler getResultSetHandler() {
+    public IResultSetHandler<Subjects> getResultSetHandler() {
         return handler;
     }
-
-    private Subjects cast(Entity entity) {
-        if (entity instanceof Subjects) {
-            return (Subjects) entity;
-        }
-        throw new ClassCastException();
-    } 
 }

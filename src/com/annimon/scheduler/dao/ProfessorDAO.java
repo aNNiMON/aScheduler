@@ -11,12 +11,12 @@ import java.util.List;
  *
  * @author aNNiMON
  */
-public class ProfessorDAO implements IDAO {
+public class ProfessorDAO implements IDAO<Professors> {
     
-    private final IResultSetHandler handler = new IResultSetHandler() {
+    private final IResultSetHandler<Professors> handler = new IResultSetHandler<Professors>() {
 
         @Override
-        public Entity process(ResultSet rs) throws Exception {
+        public Professors process(ResultSet rs) throws Exception {
             Professors pr = new Professors();
             pr.setId(rs.getInt(1));
             pr.setLastname(rs.getString(2));
@@ -34,9 +34,7 @@ public class ProfessorDAO implements IDAO {
     }
 
     @Override
-    public int insert(Entity entity) {
-        Professors pr = cast(entity);
-        
+    public int insert(Professors pr) {
         String sql = "INSERT INTO professors(id, lastname, firstname, middlename) " +
                 "VALUES (?, ?, ?, ?)";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
@@ -46,9 +44,7 @@ public class ProfessorDAO implements IDAO {
     }
     
     @Override
-    public int update(Entity entity) {
-        Professors pr = cast(entity);
-        
+    public int update(Professors pr) {
         String sql = "UPDATE professors SET lastname = ?, firstname = ?, " +
                 " middlename = ? WHERE id = ?";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
@@ -58,23 +54,16 @@ public class ProfessorDAO implements IDAO {
     }
 
     @Override
-    public int delete(Entity entity) {
+    public int delete(Professors pr) {
         String sql = "DELETE FROM professors WHERE id = ?";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
-            entity.getId()
+            pr.getId()
         });
         return rowNum;
     }
     
     @Override
-    public IResultSetHandler getResultSetHandler() {
+    public IResultSetHandler<Professors> getResultSetHandler() {
         return handler;
     }
-
-    private Professors cast(Entity entity) {
-        if (entity instanceof Professors) {
-            return (Professors) entity;
-        }
-        throw new ClassCastException();
-    } 
 }

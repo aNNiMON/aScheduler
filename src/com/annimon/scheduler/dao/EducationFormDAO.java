@@ -11,12 +11,12 @@ import java.util.List;
  *
  * @author aNNiMON
  */
-public class EducationFormDAO implements IDAO {
+public class EducationFormDAO implements IDAO<EducationForms> {
     
-    private final IResultSetHandler handler = new IResultSetHandler() {
+    private final IResultSetHandler<EducationForms> handler = new IResultSetHandler<EducationForms>() {
 
         @Override
-        public Entity process(ResultSet rs) throws Exception {
+        public EducationForms process(ResultSet rs) throws Exception {
             EducationForms ef = new EducationForms();
             ef.set_Id(rs.getShort(1));
             ef.setType(rs.getString(2));
@@ -32,21 +32,17 @@ public class EducationFormDAO implements IDAO {
     }
 
     @Override
-    public int insert(Entity entity) {
-        EducationForms au = cast(entity);
-        
+    public int insert(EducationForms ef) {
         String sql = "INSERT INTO education_forms(id, type) " +
                 "VALUES (?, ?)";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
-            au.getId(), au.getType()
+            ef.getId(), ef.getType()
         });
         return rowNum;
     }
     
     @Override
-    public int update(Entity entity) {
-        EducationForms ef = cast(entity);
-        
+    public int update(EducationForms ef) {
         String sql = "UPDATE education_forms SET type = ? WHERE id = ?";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
             ef.getType(), ef.getId()
@@ -55,9 +51,7 @@ public class EducationFormDAO implements IDAO {
     }
 
     @Override
-    public int delete(Entity entity) {
-        EducationForms ef = cast(entity);
-        
+    public int delete(EducationForms ef) {
         String sql = "DELETE FROM education_forms WHERE id = ?";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
             ef.get_Id()
@@ -66,14 +60,7 @@ public class EducationFormDAO implements IDAO {
     }
     
     @Override
-    public IResultSetHandler getResultSetHandler() {
+    public IResultSetHandler<EducationForms> getResultSetHandler() {
         return handler;
     }
-
-    private EducationForms cast(Entity entity) {
-        if (entity instanceof EducationForms) {
-            return (EducationForms) entity;
-        }
-        throw new ClassCastException();
-    } 
 }

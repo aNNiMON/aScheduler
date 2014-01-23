@@ -11,12 +11,12 @@ import java.util.List;
  *
  * @author aNNiMON
  */
-public class AudienceDAO implements IDAO {
+public class AudienceDAO implements IDAO<Audiences> {
     
-    private final IResultSetHandler handler = new IResultSetHandler() {
+    private final IResultSetHandler<Audiences> handler = new IResultSetHandler<Audiences>() {
 
         @Override
-        public Entity process(ResultSet rs) throws Exception {
+        public Audiences process(ResultSet rs) throws Exception {
             Audiences au = new Audiences();
             au.setId(rs.getInt(1));
             au.setNumber(rs.getShort(2));
@@ -35,9 +35,7 @@ public class AudienceDAO implements IDAO {
     }
 
     @Override
-    public int insert(Entity entity) {
-        Audiences au = cast(entity);
-        
+    public int insert(Audiences au) {
         String sql = "INSERT INTO audiences(id, number, type, housing, capacity) " +
                 "VALUES (?, ?, ?, ?, ?)";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
@@ -47,9 +45,7 @@ public class AudienceDAO implements IDAO {
     }
     
     @Override
-    public int update(Entity entity) {
-        Audiences au = cast(entity);
-        
+    public int update(Audiences au) {
         String sql = "UPDATE audiences SET number = ?, type = ?," +
                 " housing = ?, capacity = ? WHERE id = ?";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
@@ -59,23 +55,16 @@ public class AudienceDAO implements IDAO {
     }
 
     @Override
-    public int delete(Entity entity) {
+    public int delete(Audiences au) {
         String sql = "DELETE FROM audiences WHERE id = ?";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
-            entity.getId()
+            au.getId()
         });
         return rowNum;
     }
     
     @Override
-    public IResultSetHandler getResultSetHandler() {
+    public IResultSetHandler<Audiences> getResultSetHandler() {
         return handler;
     }
-
-    private Audiences cast(Entity entity) {
-        if (entity instanceof Audiences) {
-            return (Audiences) entity;
-        }
-        throw new ClassCastException();
-    } 
 }

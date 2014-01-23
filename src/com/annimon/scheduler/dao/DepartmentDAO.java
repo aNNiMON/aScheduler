@@ -11,12 +11,12 @@ import java.util.List;
  *
  * @author aNNiMON
  */
-public class DepartmentDAO implements IDAO {
+public class DepartmentDAO implements IDAO<Departments> {
     
-    private final IResultSetHandler handler = new IResultSetHandler() {
+    private final IResultSetHandler<Departments> handler = new IResultSetHandler<Departments>() {
 
         @Override
-        public Entity process(ResultSet rs) throws Exception {
+        public Departments process(ResultSet rs) throws Exception {
             Departments dp = new Departments();
             dp.setId(rs.getInt(1));
             dp.setName(rs.getString(2));
@@ -33,9 +33,7 @@ public class DepartmentDAO implements IDAO {
     }
 
     @Override
-    public int insert(Entity entity) {
-        Departments dp = cast(entity);
-        
+    public int insert(Departments dp) {
         String sql = "INSERT INTO departments(id, name, faculty) " +
                 "VALUES (?, ?, ?)";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
@@ -45,9 +43,7 @@ public class DepartmentDAO implements IDAO {
     }
     
     @Override
-    public int update(Entity entity) {
-        Departments dp = cast(entity);
-        
+    public int update(Departments dp) {
         String sql = "UPDATE departments SET name = ?, faculty = ? " +
                 " WHERE id = ?";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
@@ -57,23 +53,16 @@ public class DepartmentDAO implements IDAO {
     }
 
     @Override
-    public int delete(Entity entity) {
+    public int delete(Departments dp) {
         String sql = "DELETE FROM departments WHERE id = ?";
         int rowNum = DBConnection.getInstance().executeUpdate(sql, new Object[] {
-            entity.getId()
+            dp.getId()
         });
         return rowNum;
     }
     
     @Override
-    public IResultSetHandler getResultSetHandler() {
+    public IResultSetHandler<Departments> getResultSetHandler() {
         return handler;
-    }
-
-    private Departments cast(Entity entity) {
-        if (entity instanceof Departments) {
-            return (Departments) entity;
-        }
-        throw new ClassCastException();
     }
 }
