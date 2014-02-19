@@ -1,7 +1,6 @@
 package com.annimon.scheduler.gui;
 
 import com.annimon.scheduler.dao.DAOKeeper;
-import com.annimon.scheduler.data.Groups;
 import com.annimon.scheduler.model.GroupModel;
 import com.annimon.scheduler.util.HtmlBuilder;
 
@@ -31,7 +30,7 @@ public class ReportGroups extends AbstractRepotsForm {
         
         String[] name = new String[model.getRowCount()];
         for (int i = 0; i < name.length; i++) {
-            name[i] = ((Groups) model.getEntity(i)).getName();
+            name[i] = model.getEntity(i).getName();
         }
         return name;
     }

@@ -21,7 +21,7 @@ public class ReportProfessors extends AbstractRepotsForm {
 
     @Override
     protected void selectionChanged(int selectionIndex) {
-        Professors prof = (Professors) model.getEntity(selectionIndex);
+        Professors prof = model.getEntity(selectionIndex);
         
         // Самый загруженный день преподавателя.
         String sql = "CALL prof_doomsday(?)";
@@ -66,7 +66,7 @@ public class ReportProfessors extends AbstractRepotsForm {
         
         String[] name = new String[model.getRowCount()];
         for (int i = 0; i < name.length; i++) {
-            name[i] = ((Professors) model.getEntity(i)).toString();
+            name[i] = model.getEntity(i).toString();
         }
         return name;
     }

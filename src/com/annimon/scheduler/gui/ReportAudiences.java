@@ -20,7 +20,7 @@ public class ReportAudiences extends AbstractRepotsForm {
     
     @Override
     protected void selectionChanged(int selectionIndex) {
-        Audiences au = (Audiences) model.getEntity(selectionIndex);
+        Audiences au = model.getEntity(selectionIndex);
         
         // Какие предметы проводятся в аудитории.
         String sql = "CALL au_subjects(?)";
@@ -46,7 +46,7 @@ public class ReportAudiences extends AbstractRepotsForm {
         
         String[] name = new String[model.getRowCount()];
         for (int i = 0; i < name.length; i++) {
-            name[i] = ((Audiences) model.getEntity(i)).getFullNumber();
+            name[i] = model.getEntity(i).getFullNumber();
         }
         return name;
     }
