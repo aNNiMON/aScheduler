@@ -25,10 +25,10 @@ public class GUIUtils {
     }
     
     public static SpinnerNumberModel createShortSpinnerModel() {
-        return new SpinnerNumberModel(0, 0, null, 1);
+        return new SpinnerNumberModel((short)0, (short)0, null, (short)1);
     }
     
     public static SpinnerNumberModel createShortSpinnerModel(short min) {
-        return new SpinnerNumberModel(min, min, null, 1);
+        return new SpinnerNumberModel((short)min, (short)min, null, (short)1);
     }
 }
